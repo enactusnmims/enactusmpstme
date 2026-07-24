@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>All Projects - Enactus MPSTME</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<nav class="nav">
+
+  <div class="nav-inner">
+
+    <a href="index.html" class="nav-brand"><div class="nav-brand-logo"><img src="images/enactus-logo.svg" alt="Enactus" width="20" height="20"></div><div class="nav-brand-text"><div class="nav-brand-name">Enactus MPSTME</div><div class="nav-brand-sub">NMIMS Mumbai</div></div></a>
+
+    <ul class="nav-links" id="navLinks">
+
+      <li><a href="index.html">Home</a></li>
+
+      <li class="nav-dropdown"><a href="#">Who We Are <span class="nav-drop-icon">&#9660;</span></a><div class="dropdown"><a href="about.html">About Us</a><a href="team.html">Team 2026-27</a><a href="alumni.html">Alumni</a></div></li>
+
+      <li class="nav-dropdown"><a href="#">Projects <span class="nav-drop-icon">&#9660;</span></a><div class="dropdown"><a href="shilpkaar.html">Project Shilpkaar</a><a href="rupaantar.html">Project Rupaantar</a><a href="agrilink.html">AgriLink 360</a><a href="projects.html" class="active">All Projects</a></div></li>
+
+      <li><a href="history.html">History</a></li><li><a href="contact.html">Contact</a></li>
+
+      <li><a href="contact.html#support" class="nav-cta">Support Us</a></li>
+
+    </ul>
+
+    <button class="nav-hamburger" onclick="toggleNav()"><span></span><span></span><span></span></button>
+
+  </div>
+
+</nav>
+
+<div class="page-content">
+
+  <section class="page-hero">
+
+    <div class="container page-hero-inner">
+
+      <div class="page-hero-eyebrow reveal">Our Ventures</div>
+
+      <h1 class="page-hero-title reveal">All <span>Projects</span></h1>
+
+      <p class="page-hero-sub reveal">From artisan empowerment to agri-tech innovation - every project is a student-built venture with real beneficiaries and measurable social impact.</p>
+
+    </div>
+
+  </section>
+
+
+
+  <div class="impact-strip"><div class="impact-strip-grid" data-stagger>
+
+    <div class="impact-cell stagger-child"><div class="impact-num">&#8377;50L+</div><div class="impact-label">Revenue Generated</div></div>
+
+    <div class="impact-cell stagger-child"><div class="impact-num">10k+</div><div class="impact-label">Lives Impacted</div></div>
+
+    <div class="impact-cell stagger-child"><div class="impact-num">6+</div><div class="impact-label">Projects Launched</div></div>
+
+    <div class="impact-cell stagger-child"><div class="impact-num">10+</div><div class="impact-label">Years of Impact</div></div>
+
+  </div></div>
+
+
+
+  <!-- ACTIVE PROJECTS -->
+
+  <section class="section">
+
+    <div class="container">
+
+      <div class="reveal" style="margin-bottom:40px"><div class="eyebrow">Active Ventures 2025-26</div><h2 class="heading-lg">Current <span class="text-yellow">Projects</span></h2></div>
+      
+      <div class="filter-bar reveal" style="margin-bottom: 30px; display: flex; gap: 12px; flex-wrap: wrap;">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="empowerment">Empowerment</button>
+        <button class="filter-btn" data-filter="environment">Environment</button>
+        <button class="filter-btn" data-filter="tech">Tech</button>
+      </div>
+
+      <div class="grid-2 project-grid" style="gap:18px" data-stagger>
+
+        <a href="shilpkaar.html" class="project-card featured stagger-child filter-item" data-category="empowerment" style="grid-row:span 2">
+
+          <div class="project-card-banner">
+            <img src="images/shipkaar-banner.jpg" alt="Shilpkaar Banner" class="banner-bg">
+            <div class="banner-logo-wrap">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--shilp)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path>
+                <line x1="16" y1="8" x2="2" y2="22"></line>
+                <line x1="17.5" y1="15" x2="9" y2="15"></line>
+              </svg>
+            </div>
+          </div>
+
+          <div class="project-card-body"><div class="project-card-tag">Handicrafts - Women Empowerment<span class="live-indicator">Live</span></div><div class="project-card-name">Project Shilpkaar</div><div class="project-card-desc">Empowering Indian artisans by promoting traditional handicrafts through sustainable plarn bags made from upcycled plastic. Bridging culture, sustainability and fair livelihood for craftswomen. Recognised at the highest levels of government including PM Modi.</div><div class="project-card-stats"><div><div class="pcs-num">&#8377;6L+</div><div class="pcs-label">Sales</div></div><div><div class="pcs-num">80+</div><div class="pcs-label">Artisans</div></div><div><div class="pcs-num">375kg+</div><div class="pcs-label">Plastic Saved</div></div><div><div class="pcs-num">50%</div><div class="pcs-label">Income Increase</div></div></div><div class="project-card-link">Explore Project &#8594;</div></div>
+
+        </a>
+
+        <a href="rupaantar.html" class="project-card stagger-child filter-item" data-category="environment">
+
+          <div class="project-card-banner">
+            <img src="images/rupaantar-banner.jpg" alt="Rupaantar Banner" class="banner-bg">
+            <div class="banner-logo-wrap">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--rupa)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path>
+                <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path>
+              </svg>
+            </div>
+          </div>
+
+          <div class="project-card-body"><div class="project-card-tag">Agro-Waste - Circular Economy<span class="live-indicator">Live</span></div><div class="project-card-name">Project Rupaantar</div><div class="project-card-desc">Transforming agricultural waste (rice husk and straw) into premium eco-paper products while empowering rural women artisans. Priced at Rs. 5 per unit. 1st at Kalinga Institute, 2nd at IIM Indore.</div><div class="project-card-link">Explore Project &#8594;</div></div>
+
+        </a>
+
+        <a href="agrilink.html" class="project-card stagger-child filter-item" data-category="tech">
+
+          <div class="project-card-banner">
+            <img src="images/agrilink-banner.jpg" alt="AgriLink Banner" class="banner-bg">
+            <div class="banner-logo-wrap">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--agri)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                <rect x="9" y="9" width="6" height="6"></rect>
+                <line x1="9" y1="1" x2="9" y2="4"></line>
+                <line x1="15" y1="1" x2="15" y2="4"></line>
+                <line x1="9" y1="20" x2="9" y2="23"></line>
+                <line x1="15" y1="20" x2="15" y2="23"></line>
+                <line x1="20" y1="9" x2="23" y2="9"></line>
+                <line x1="20" y1="14" x2="23" y2="14"></line>
+                <line x1="1" y1="9" x2="4" y2="9"></line>
+                <line x1="1" y1="14" x2="4" y2="14"></line>
+              </svg>
+            </div>
+          </div>
+
+          <div class="project-card-body"><div class="project-card-tag">Agri-Tech - AI - FinTech<span class="live-indicator">Live</span></div><div class="project-card-name">AgriLink 360</div><div class="project-card-desc">AI-powered platform connecting 120M+ smallholder farmers to verified buyers, crop insights and embedded financial tools. Eliminating exploitative middlemen and ending rural isolation.</div><div class="project-card-link">Explore Project &#8594;</div></div>
+
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- HISTORICAL PROJECTS -->
+
+  <section class="section section-dark">
+
+    <div class="container">
+
+      <div class="reveal" style="margin-bottom:40px"><div class="eyebrow">Our Legacy</div><h2 class="heading-lg">Past <span class="text-yellow">Projects</span></h2><p class="body" style="margin-top:14px">Projects that have shaped our organisation and created lasting community impact.</p></div>
+
+      <div class="grid-3" data-stagger>
+
+        <div class="glass stagger-child" style="padding:28px;border-radius:var(--r)">
+
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--yellow);margin-bottom:12px">Project Zeen</div>
+
+          <div class="heading-sm" style="margin-bottom:10px">Farmer to Consumer Markets</div>
+
+          <p class="body-sm">Bridged urban communities with farmers through F2C markets across Mumbai. Rs. 29.5L+ revenue, 2,400+ beneficiaries, 45 markets, 300% income increase for farmers.</p>
+
+        </div>
+
+        <div class="glass stagger-child" style="padding:28px;border-radius:var(--r)">
+
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--yellow);margin-bottom:12px">Project Parivartan</div>
+
+          <div class="heading-sm" style="margin-bottom:10px">Empowering Rag Pickers</div>
+
+          <p class="body-sm">Empowered rag pickers through upcycling. 38 women trained, 150% income increase, 2,236 kg of waste repurposed into sawdust pencils and other products.</p>
+
+        </div>
+
+        <div class="glass stagger-child" style="padding:28px;border-radius:var(--r)">
+
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--yellow);margin-bottom:12px">Project Vishuddh</div>
+
+          <div class="heading-sm" style="margin-bottom:10px">Health and Sanitation</div>
+
+          <p class="body-sm">Empowered low-income women to manufacture eco-friendly sanitary pads and Vidhra detergent. 800+ individuals impacted across slum communities.</p>
+
+        </div>
+
+        <div class="glass stagger-child" style="padding:28px;border-radius:var(--r)">
+
+          <div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--yellow);margin-bottom:12px">Project Patched</div>
+
+          <div class="heading-sm" style="margin-bottom:10px">Uplifting Trafficking Survivors</div>
+
+          <p class="body-sm">3E model (Education, Entrepreneurship, Empowerment) for trafficking survivors. 28+ women helped, Rs. 5,000/month average income through patchwork craft sales.</p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <div class="cta-banner"><div class="cta-banner-inner"><div class="cta-banner-title">Support Our Projects</div><div class="cta-banner-sub">Partner with us through CSR, bulk product orders, or corporate gifting.</div><div class="cta-banner-btns"><a href="contact.html#support" class="btn btn-dark btn-lg">Get in Touch</a><a href="https://www.projectshilpkaar.com" target="_blank" rel="noopener" class="btn btn-outline btn-lg" style="color:var(--text-inverse);border-color:rgba(5,5,5,0.3)">Shop Shilpkaar &#8599;</a></div></div></div>
+
+
+
+  <footer><div class="footer-grid"><div><a href="index.html" class="nav-brand" style="display:inline-flex"><div class="nav-brand-logo"><img src="images/enactus-logo.svg" alt="Enactus" width="20" height="20"></div><div class="nav-brand-text"><div class="nav-brand-name">Enactus MPSTME</div><div class="nav-brand-sub">NMIMS Mumbai</div></div></a><p class="footer-about-desc">Student-driven ventures creating sustainable livelihoods at NMIMS MPSTME, Mumbai.</p><div class="footer-socials"><a href="https://www.linkedin.com/company/enactus-mpstme/" target="_blank" rel="noopener" class="footer-social"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a><a href="https://www.instagram.com/en.mpstme/" target="_blank" rel="noopener" class="footer-social"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zM17.5 6.5h.01"/></svg></a></div></div><div><div class="footer-col-title">Navigate</div><div class="footer-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="team.html">Team</a><a href="alumni.html">Alumni</a><a href="history.html">History</a></div></div><div><div class="footer-col-title">Projects</div><div class="footer-links"><a href="shilpkaar.html">Shilpkaar</a><a href="rupaantar.html">Rupaantar</a><a href="agrilink.html">AgriLink 360</a><a href="projects.html">All Projects</a></div></div><div><div class="footer-col-title">Contact</div><div class="footer-links"><a href="mailto:enactus.nmims@gmail.com">enactus.nmims@gmail.com</a><a href="tel:+918291001563">+91 82910 01563</a><a href="contact.html">Get in Touch</a></div></div></div><div class="footer-bottom"><div class="footer-copy">&copy; 2025 Enactus MPSTME &middot; <span>Business Thinking. Social Impact.</span></div></div></footer>
+
+</div>
+
+<script src="shared.js"></script>
+
+</body>
+
+</html>
+
+

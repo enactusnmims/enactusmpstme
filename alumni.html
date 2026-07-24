@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Alumni - Enactus MPSTME</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .alumni-year {
+            margin-bottom: 72px;
+        }
+
+        .alumni-year-header {
+
+            display: flex;
+            align-items: center;
+            gap: 20px;
+
+            padding-bottom: 20px;
+            margin-bottom: 32px;
+
+            border-bottom: 2px solid var(--yellow);
+
+        }
+
+        .alumni-year-label {
+            font-family: var(--font-serif);
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .alumni-year-tag {
+
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+
+            color: var(--grey-500);
+            background: var(--grey-100);
+
+            padding: 4px 12px;
+            border-radius: 100px;
+
+        }
+
+        .alumni-section {
+            margin-bottom: 36px;
+        }
+
+        .alumni-section-title {
+
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+
+            color: var(--grey-500);
+            margin-bottom: 14px;
+
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+        }
+
+        .alumni-section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--grey-200);
+        }
+
+        .alumni-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 14px;
+        }
+
+        .alumni-card {
+            background: var(--onyx-mid);
+            border: 1px solid var(--onyx-border);
+            border-radius: var(--radius);
+            padding: 20px 16px;
+            text-align: center;
+            border-top: 2px solid transparent;
+            transition: all var(--trans);
+        }
+        .alumni-card:hover { transform: translateY(-2px); border-color: rgba(255, 255, 255, 0.08); }
+
+        .alumni-card.supercore {
+            border-top-color: var(--yellow);
+        }
+
+        .alumni-card.core {
+            border-top-color: var(--navy-light);
+        }
+
+        .alumni-card.proj-s {
+            border-top-color: var(--shilp);
+        }
+
+        .alumni-card.proj-r {
+            border-top-color: var(--rupa);
+        }
+
+        .alumni-avatar {
+
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+
+            background: var(--onyx-light);
+            color: var(--yellow);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 16px;
+            font-weight: 700;
+            margin: 0 auto 10px;
+
+        }
+
+        .alumni-card.core .alumni-avatar {
+            color: var(--text-primary);
+        }
+
+        .alumni-card.proj-s .alumni-avatar {
+            background: var(--shilp-light);
+            color: var(--shilp);
+        }
+
+        .alumni-card.proj-r .alumni-avatar {
+            background: var(--rupa-light);
+            color: var(--rupa);
+        }
+
+        .alumni-name {
+            font-size: 13.5px;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.3;
+            margin-bottom: 4px;
+        }
+
+        .alumni-role {
+            font-size: 11.5px;
+            color: var(--text-muted);
+            line-height: 1.4;
+            margin-bottom: 4px;
+        }
+
+        .alumni-year-text {
+            font-size: 10.5px;
+            color: var(--text-muted);
+            opacity: 0.6;
+        }
+
+        .notice-banner {
+
+            background: var(--yellow-pale);
+            border: 1px solid rgba(255, 209, 0, 0.4);
+
+            border-radius: var(--radius);
+            padding: 16px 20px;
+
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 40px;
+
+        }
+
+        .notice-icon {
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .notice-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        @media (max-width: 900px) {
+            .alumni-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .alumni-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="nav">
+
+        <div class="nav-inner">
+
+            <a href="index.html" class="nav-brand">
+
+                <div class="nav-brand-logo"><img src="images/enactus-logo.svg" alt="Enactus" width="22" height="22">
+                </div>
+
+                <div class="nav-brand-text">
+                    <div class="nav-brand-name">Enactus MPSTME</div>
+                    <div class="nav-brand-sub">NMIMS Mumbai</div>
+                </div>
+
+            </a>
+
+            <ul class="nav-links" id="navLinks">
+
+                <li><a href="index.html">Home</a></li>
+
+                <li class="nav-dropdown"><a href="#">Who We Are <span class="nav-drop-icon">&#9660;</span></a>
+
+                    <div class="dropdown"><a href="about.html">About Us</a><a href="team.html">Team 2026-27</a><a
+                            href="alumni.html" class="active">Alumni</a></div>
+
+                </li>
+
+                <li class="nav-dropdown"><a href="#">Projects <span class="nav-drop-icon">&#9660;</span></a>
+
+                    <div class="dropdown"><a href="shilpkaar.html">Project Shilpkaar</a><a href="rupaantar.html">Project
+                            Rupaantar</a><a href="agrilink.html">AgriLink 360</a><a href="projects.html">All
+                            Projects</a></div>
+
+                </li>
+
+                <li><a href="history.html">History</a></li>
+
+                <li><a href="contact.html">Contact</a></li>
+
+                <li><a href="contact.html#support" class="nav-cta">Support Us</a></li>
+
+            </ul>
+
+            <button class="nav-hamburger" onclick="toggleNav()"><span></span><span></span><span></span></button>
+
+        </div>
+
+    </nav>
+
+
+
+    <div class="page-content">
+
+        <section class="page-hero">
+
+            <div class="page-hero-bg"></div>
+
+            <div class="container page-hero-inner">
+
+                <div class="page-hero-eyebrow reveal">Our Legacy</div>
+
+                <h1 class="page-hero-title reveal">Alumni <span>Directory</span></h1>
+
+                <p class="page-hero-sub reveal">Recognising every student leader who has driven social impact at Enactus
+                    MPSTME across the years.</p>
+
+            </div>
+
+        </section>
+
+
+
+        <section class="section">
+
+            <div class="container">
+
+
+
+                <div class="timeline-wrap">
+                    
+                    <div class="timeline-nav">
+                        <div class="timeline-nav-title">Select Year</div>
+                        <div class="timeline-nav-list">
+                            <span class="alumni-nav-item active" data-target="y2025">2025-26</span>
+                        </div>
+                    </div>
+
+                    <div class="timeline-body">
+
+                        <div class="notice-banner">
+                            <div class="notice-icon">
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z" fill="var(--yellow)" />
+                                </svg>
+                            </div>
+                            <div class="notice-text">This page is updated annually. More years will be added as records are provided. If your name is missing or incorrect, please contact us at <a href="mailto:enactus.nmims@gmail.com" style="color:var(--yellow);font-weight:600">enactus.nmims@gmail.com</a>.</div>
+                        </div>
+
+                        <!-- =============== 2025-26 =============== -->
+                        <div class="alumni-year" id="y2025">
+
+                    <div class="alumni-year-header">
+
+                        <div class="alumni-year-label">2025-26</div>
+
+                        <div class="alumni-year-tag">Previous Batch</div>
+
+                    </div>
+
+
+
+                    <!-- SuperCore -->
+
+                    <div class="alumni-section">
+
+                        <div class="alumni-section-title">SuperCore</div>
+
+                        <div class="alumni-grid">
+
+                            <div class="alumni-card supercore">
+
+                                <div class="alumni-avatar">MK</div>
+
+                                <div class="alumni-name">Mohammed Azeem Khan</div>
+
+                                <div class="alumni-role">President</div>
+
+                                <div class="alumni-year-text">Fifth Year MBA Tech</div>
+
+                            </div>
+
+                            <div class="alumni-card supercore">
+
+                                <div class="alumni-avatar">PP</div>
+
+                                <div class="alumni-name">Pranjal Prabhu</div>
+
+                                <div class="alumni-role">Vice President</div>
+
+                                <div class="alumni-year-text">Fourth Year MBA Tech</div>
+
+                            </div>
+
+                            <div class="alumni-card supercore">
+
+                                <div class="alumni-avatar">DB</div>
+
+                                <div class="alumni-name">Dhruv Bhandari</div>
+
+                                <div class="alumni-role">Director - Ops and Collabs</div>
+
+                                <div class="alumni-year-text">Third Year BTech</div>
+
+                            </div>
+
+                            <div class="alumni-card supercore">
+
+                                <div class="alumni-avatar">MR</div>
+
+                                <div class="alumni-name">Mihir Raut</div>
+
+                                <div class="alumni-role">Director - Media, Marketing and Tech</div>
+
+                                <div class="alumni-year-text">Fourth Year MBA Tech</div>
+
+                            </div>
+
+                            <div class="alumni-card supercore">
+
+                                <div class="alumni-avatar">AP</div>
+
+                                <div class="alumni-name">Ayush Parab</div>
+
+                                <div class="alumni-role">All Projects Director</div>
+
+                                <div class="alumni-year-text">Fourth Year MBA Tech</div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Core -->
+
+                    <div class="alumni-section">
+
+                        <div class="alumni-section-title">Core - Department Heads</div>
+
+                        <div class="alumni-grid">
+
+                            <div class="alumni-card core">
+
+                                <div class="alumni-avatar">KV</div>
+
+                                <div class="alumni-name">Kanisha Vikal</div>
+
+                                <div class="alumni-role">Head of Media and Marketing</div>
+
+                                <div class="alumni-year-text">Third Year MBA Tech</div>
+
+                            </div>
+
+                            <div class="alumni-card core">
+
+                                <div class="alumni-avatar">AV</div>
+
+                                <div class="alumni-name">Aditya Vikram</div>
+
+                                <div class="alumni-role">Head of Media and Marketing</div>
+
+                                <div class="alumni-year-text">Second Year MBA Tech</div>
+
+                            </div>
+
+                            <div class="alumni-card core">
+
+                                <div class="alumni-avatar">MV</div>
+
+                                <div class="alumni-name">Manya Vador</div>
+
+                                <div class="alumni-role">Head of Ops and Collabs</div>
+
+                                <div class="alumni-year-text">Second Year MBA Tech</div>
+
+                            </div>
+
+                            <div class="alumni-card core">
+
+                                <div class="alumni-avatar">SS</div>
+
+                                <div class="alumni-name">Siddhi Shah</div>
+
+                                <div class="alumni-role">Head of Ops and Collabs</div>
+
+                                <div class="alumni-year-text">Third Year MBA Tech</div>
+
+                            </div>
+
+                            <div class="alumni-card core">
+
+                                <div class="alumni-avatar">BS</div>
+
+                                <div class="alumni-name">Balmukund Sharma</div>
+
+                                <div class="alumni-role">Head of Finance</div>
+
+                                <div class="alumni-year-text">Third Year MBA Tech</div>
+
+                            </div>
+
+                            <div class="alumni-card core">
+
+                                <div class="alumni-avatar">SK</div>
+
+                                <div class="alumni-name">Siddharth Kumar</div>
+
+                                <div class="alumni-role">Head of Technicals</div>
+
+                                <div class="alumni-year-text">Fourth Year MBA Tech</div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Project Heads -->
+
+                    <div class="alumni-section">
+
+                        <div class="alumni-section-title">Project Heads</div>
+
+                        <div class="alumni-grid">
+
+                            <div class="alumni-card proj-s">
+
+                                <div class="alumni-avatar">PR</div>
+
+                                <div class="alumni-name">Pratik</div>
+
+                                <div class="alumni-role">Project Head - Shilpkaar</div>
+
+                                <div class="alumni-year-text">Third Year MBA Tech</div>
+
+                            </div>
+
+                            <div class="alumni-card proj-r">
+
+                                <div class="alumni-avatar">AA</div>
+
+                                <div class="alumni-name">Aditi Agarwal</div>
+
+                                <div class="alumni-role">Project Head - Rupaantar</div>
+
+                                <div class="alumni-year-text">Second Year BTech</div>
+
+                            </div>
+
+                            <div class="alumni-card proj-r">
+
+                                <div class="alumni-avatar">PG</div>
+
+                                <div class="alumni-name">Parv Goel</div>
+
+                                <div class="alumni-role">Project Head - Rupaantar</div>
+
+                                <div class="alumni-year-text">Third Year BTech</div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    </div> <!-- End alumni-year -->
+                </div> <!-- End timeline-body -->
+            </div> <!-- End timeline-wrap -->
+        </div>
+
+        </section>
+
+
+
+        <footer>
+
+            <div class="footer-grid">
+
+                <div>
+
+                    <a href="index.html" class="nav-brand" style="display:inline-flex">
+                        <div class="nav-brand-logo"><img src="images/enactus-logo.svg" alt="Enactus" width="22"
+                                height="22"></div>
+                        <div class="nav-brand-text">
+                            <div class="nav-brand-name">Enactus MPSTME</div>
+                            <div class="nav-brand-sub">NMIMS Mumbai</div>
+                        </div>
+                    </a>
+
+                    <p class="footer-about-desc">Student-driven ventures creating sustainable livelihoods and
+                        environmental change at NMIMS MPSTME, Mumbai.</p>
+
+                    <div class="footer-socials"><a href="https://www.linkedin.com/company/enactus-mpstme/"
+                            target="_blank" rel="noopener" class="footer-social"><svg width="18" height="18"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path
+                                    d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                                <circle cx="4" cy="4" r="2" />
+                            </svg></a><a href="https://www.instagram.com/en.mpstme/" target="_blank" rel="noopener"
+                            class="footer-social"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                                <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zM17.5 6.5h.01" />
+                            </svg></a></div>
+
+                </div>
+
+                <div>
+                    <div class="footer-col-title">Navigate</div>
+                    <div class="footer-links"><a href="index.html">Home</a><a href="about.html">About Us</a><a
+                            href="team.html">Team</a><a href="alumni.html">Alumni</a><a href="history.html">History</a>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="footer-col-title">Projects</div>
+                    <div class="footer-links"><a href="shilpkaar.html">Shilpkaar</a><a
+                            href="rupaantar.html">Rupaantar</a><a href="agrilink.html">AgriLink 360</a><a
+                            href="projects.html">All Projects</a></div>
+                </div>
+
+                <div>
+                    <div class="footer-col-title">Contact</div>
+                    <div class="footer-links"><a href="mailto:enactus.nmims@gmail.com">enactus.nmims@gmail.com</a><a
+                            href="tel:+918291001563">+91 82910 01563</a><a href="contact.html">Get in Touch</a></div>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copy">&copy; 2025 Enactus MPSTME &middot; <span>Business Thinking. Social
+                        Impact.</span></div>
+            </div>
+
+        </footer>
+
+    </div>
+
+    <script src="shared.js"></script>
+
+</body>
+
+</html>

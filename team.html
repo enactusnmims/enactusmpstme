@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Team 2026-27 - Enactus MPSTME</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+  .team-section { margin-bottom: 56px; }
+
+  .team-section-title {
+    font-family: var(--font-serif); font-size: 20px; font-weight: 700;
+    color: var(--text-primary); margin-bottom: 20px;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .team-section-title::after { content: ''; flex: 1; height: 1.5px; background: var(--onyx-border); }
+
+  .g5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+
+  .g4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+  .g3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+  .g2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+
+  .g1max { max-width: 220px; }
+
+  @media (max-width: 1024px) { .g5 { grid-template-columns: repeat(3, 1fr); } .g4 { grid-template-columns: repeat(2, 1fr); } }
+
+  @media (max-width: 600px) { .g5, .g4, .g3 { grid-template-columns: 1fr 1fr; } .g2 { grid-template-columns: 1fr 1fr; } }
+
+</style>
+
+</head>
+
+<body>
+
+<nav class="nav">
+
+  <div class="nav-inner">
+
+    <a href="index.html" class="nav-brand">
+
+      <div class="nav-brand-logo"><img src="images/enactus-logo.svg" alt="Enactus" width="22" height="22"></div>
+
+      <div class="nav-brand-text"><div class="nav-brand-name">Enactus MPSTME</div><div class="nav-brand-sub">NMIMS Mumbai</div></div>
+
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+
+      <li><a href="index.html">Home</a></li>
+
+      <li class="nav-dropdown"><a href="#">Who We Are <span class="nav-drop-icon">&#9660;</span></a>
+
+        <div class="dropdown"><a href="about.html">About Us</a><a href="team.html" class="active">Team 2026-27</a><a href="alumni.html">Alumni</a></div>
+
+      </li>
+
+      <li class="nav-dropdown"><a href="#">Projects <span class="nav-drop-icon">&#9660;</span></a>
+
+        <div class="dropdown"><a href="shilpkaar.html">Project Shilpkaar</a><a href="rupaantar.html">Project Rupaantar</a><a href="agrilink.html">AgriLink 360</a><a href="projects.html">All Projects</a></div>
+
+      </li>
+
+      <li><a href="history.html">History</a></li>
+
+      <li><a href="contact.html">Contact</a></li>
+
+      <li><a href="contact.html#support" class="nav-cta">Support Us</a></li>
+
+    </ul>
+
+    <button class="nav-hamburger" onclick="toggleNav()"><span></span><span></span><span></span></button>
+
+  </div>
+
+</nav>
+
+
+
+<div class="page-content">
+
+  <section class="page-hero">
+
+    <div class="page-hero-bg"></div>
+
+    <div class="container page-hero-inner">
+
+      <div class="page-hero-eyebrow reveal">2026-2027</div>
+
+      <h1 class="page-hero-title reveal">Our <span>Team</span></h1>
+
+      <p class="page-hero-sub reveal">The student leaders driving Enactus MPSTME's social impact - organised across SuperCore leadership, Core departments and Project teams.</p>
+
+    </div>
+
+  </section>
+
+
+
+  <section class="section">
+
+    <div class="container">
+
+
+
+      <!-- =================== SUPERCORE =================== -->
+
+      <div style="margin-bottom:12px">
+
+        <span class="tier-badge supercore">
+
+          SuperCore
+
+        </span>
+
+      </div>
+
+      <p class="body" style="color:var(--text-secondary);margin-bottom:32px;max-width:560px;line-height:1.75">The executive leadership responsible for Enactus MPSTME's strategic direction, cross-department coordination and overall impact for the 2026-27 academic year.</p>
+
+
+
+      <!-- President -->
+
+      <div class="team-section">
+
+        <div class="team-section-title">President</div>
+
+        <div class="g1max">
+
+          <div class="team-card supercore">
+
+            <div class="team-card-bar"></div>
+
+            <div class="team-avatar">AP</div>
+
+            <div class="team-name">Ayush Parab</div>
+
+            <div class="team-role">President</div>
+
+            <div class="team-year">Fifth Year MBA Tech</div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Directors -->
+
+      <div class="team-section">
+
+        <div class="team-section-title">Directors</div>
+
+        <div class="g5">
+
+          <div class="team-card supercore">
+
+            <div class="team-card-bar"></div>
+
+            <div class="team-avatar">SS</div>
+
+            <div class="team-name">Siddhi Shah</div>
+
+            <div class="team-role">Director - Operations and Collaborations</div>
+
+            <div class="team-year">Fourth Year MBA Tech</div>
+
+          </div>
+
+          <div class="team-card supercore">
+
+            <div class="team-card-bar"></div>
+
+            <div class="team-avatar">PG</div>
+
+            <div class="team-name">Parv Goel</div>
+
+            <div class="team-role">Director - All Projects</div>
+
+            <div class="team-year">Fourth Year BTech</div>
+
+          </div>
+
+          <div class="team-card supercore">
+
+            <div class="team-card-bar"></div>
+
+            <div class="team-avatar">BS</div>
+
+            <div class="team-name">Balmukund Sharma</div>
+
+            <div class="team-role">Director of Finance</div>
+
+            <div class="team-year">Fourth Year MBA Tech</div>
+
+          </div>
+
+          <div class="team-card supercore">
+
+            <div class="team-card-bar"></div>
+
+            <div class="team-avatar">SK</div>
+
+            <div class="team-name">Siddharth Kumar</div>
+
+            <div class="team-role">Director of Technicals</div>
+
+            <div class="team-year">Fifth Year MBA Tech</div>
+
+          </div>
+
+          <div class="team-card supercore">
+
+            <div class="team-card-bar"></div>
+
+            <div class="team-avatar">AA</div>
+
+            <div class="team-name">Aditi Agrawal</div>
+
+            <div class="team-role">Director of Innovation</div>
+
+            <div class="team-year">Third Year BTech</div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- =================== CORE =================== -->
+
+      <div style="border-top:2px solid var(--grey-200);padding-top:48px;margin-top:48px;margin-bottom:12px">
+
+        <span class="tier-badge core">Core Team</span>
+
+      </div>
+
+      <p class="body" style="color:var(--grey-500);margin-bottom:32px;max-width:560px">Department heads managing key operational functions across the organisation - driving media, marketing, operations, collaborations, finance, legal, technicals and innovation.</p>
+
+
+
+      <!-- Media -->
+
+      <div class="team-section">
+
+        <div class="team-section-title">Media</div>
+
+        <div class="g3" style="max-width:660px">
+
+          <div class="team-card core dept-media"><div class="team-card-bar"></div><div class="team-avatar" style="font-size:16px">IB</div><div class="team-name">Insiya Badhani</div><div class="team-role">Head of Media</div></div>
+          <div class="team-card core dept-media"><div class="team-card-bar"></div><div class="team-avatar" style="font-size:16px">BS</div><div class="team-name">Bhumika Singhvi</div><div class="team-role">Head of Media</div></div>
+          <div class="team-card core dept-media"><div class="team-card-bar"></div><div class="team-avatar" style="font-size:16px">PS</div><div class="team-name">Parini Shrivastava</div><div class="team-role">Head of Media</div></div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Marketing -->
+
+      <div class="team-section">
+
+        <div class="team-section-title">Marketing</div>
+
+        <div class="g1max">
+
+          <div class="team-card core dept-marketing"><div class="team-card-bar"></div><div class="team-avatar" style="font-size:16px">NS</div><div class="team-name">Naman Sheth</div><div class="team-role">Head of Marketing</div></div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Operations -->
+
+      <div class="team-section">
+
+        <div class="team-section-title">Operations</div>
+
+        <div class="g2" style="max-width:440px">
+
+          <div class="team-card core dept-operations"><div class="team-card-bar"></div><div class="team-avatar" style="font-size:16px">AG</div><div class="team-name">Aaditri Gupta</div><div class="team-role">Head of Operations</div></div>
+          <div class="team-card core dept-operations"><div class="team-card-bar"></div><div class="team-avatar" style="font-size:16px">AD</div><div class="team-name">Anshita Dhingra</div><div class="team-role">Head of Operations</div></div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Collaborations -->
+
+      <div class="team-section">
+
+        <div class="team-section-title">Collaborations</div>
+
+        <div class="g1max">
+
+          <div class="team-card core dept-collab"><div class="team-card-bar"></div><div class="team-avatar" style="font-size:16px">KG</div><div class="team-name">Kavya Gawade</div><div class="team-role">Head of Collaborations</div></div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Finance, Legal & Funding -->
+
+      <div class="team-section">
+
+        <div class="team-section-title">Finance, Legal and Funding</div>
+
+        <div class="g2" style="max-width:440px">
+
+          <div class="team-card core dept-finance"><div class="team-card-bar"></div><div class="team-avatar" style="font-size:16px">AL</div><div class="team-name">Atharva Lingayat</div><div class="team-role">Head of Finance</div></div>
+          <div class="team-card core dept-finance"><div class="team-card-bar"></div><div class="team-avatar" style="font-size:16px">RG</div><div class="team-name">Rayansh Gandhi</div><div class="team-role">Head of Legal and Funding</div></div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Technicals -->
+
+      <div class="team-section">
+
+        <div class="team-section-title">Technicals</div>
+
+        <div class="g2" style="max-width:440px">
+
+          <div class="team-card core dept-tech"><div class="team-card-bar"></div><div class="team-avatar" style="font-size:16px">GV</div><div class="team-name">Gaurav Verma</div><div class="team-role">Head of Technicals</div></div>
+          <div class="team-card core dept-tech"><div class="team-card-bar"></div><div class="team-avatar" style="font-size:16px">PJ</div><div class="team-name">Pinak Jivrajani</div><div class="team-role">Head of Technicals</div></div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- Innovation -->
+
+      <div class="team-section">
+
+        <div class="team-section-title">Innovation</div>
+
+        <div class="g2" style="max-width:440px">
+
+          <div class="team-card core dept-innovation"><div class="team-card-bar"></div><div class="team-avatar" style="font-size:16px">SS</div><div class="team-name">Sanshita Sahu</div><div class="team-role">Head of Innovation</div></div>
+          <div class="team-card core dept-innovation"><div class="team-card-bar"></div><div class="team-avatar" style="font-size:16px">BG</div><div class="team-name">Bhavya Gupta</div><div class="team-role">Head of Innovation</div></div>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- =================== PROJECT HEADS =================== -->
+
+      <div style="border-top:2px solid var(--grey-200);padding-top:48px;margin-top:48px;margin-bottom:12px">
+
+        <span class="tier-badge proj">Project Leadership</span>
+
+      </div>
+
+      <p class="body" style="color:var(--grey-500);margin-bottom:32px;max-width:560px">Student leaders directly running and scaling our active social impact projects on the ground.</p>
+
+
+
+      <div class="grid-2" style="gap:40px">
+
+        <!-- Shilpkaar -->
+
+        <div>
+
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+
+            <div style="width:10px;height:10px;border-radius:50%;background:var(--shilp)"></div>
+
+            <div class="label">Project Shilpkaar</div>
+
+          </div>
+
+          <div class="g2">
+
+            <div class="team-card proj-s"><div class="team-card-bar"></div><div class="team-avatar">VR</div><div class="team-name">Vaishnavi Rajendra</div><div class="team-role">Project Head</div></div>
+
+            <div class="team-card proj-s"><div class="team-card-bar"></div><div class="team-avatar">JC</div><div class="team-name">Jiya Chheda</div><div class="team-role">Project Head</div></div>
+
+          </div>
+
+        </div>
+
+        <!-- Rupaantar -->
+
+        <div>
+
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+
+            <div style="width:10px;height:10px;border-radius:50%;background:var(--rupa)"></div>
+
+            <div class="label">Project Rupaantar</div>
+
+          </div>
+
+          <div class="g2">
+
+            <div class="team-card proj"><div class="team-card-bar"></div><div class="team-avatar">PS</div><div class="team-name">Pradnesh Sawant</div><div class="team-role">Project Head</div></div>
+
+            <div class="team-card proj"><div class="team-card-bar"></div><div class="team-avatar">RB</div><div class="team-name">Rijul Biradar</div><div class="team-role">Project Head</div></div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+    </div>
+
+  </section>
+
+
+
+  <div class="cta-banner">
+
+    <div class="cta-banner-inner">
+
+      <div class="cta-banner-title">Want to Join Our Team?</div>
+
+      <div class="cta-banner-sub">MPSTME students - follow @en.mpstme on Instagram for annual recruitment announcements.</div>
+
+      <div class="cta-banner-btns">
+
+        <a href="https://www.instagram.com/en.mpstme/" target="_blank" rel="noopener" class="btn btn-yellow btn-lg">Follow @en.mpstme</a>
+
+        <a href="contact.html" class="btn btn-outline-white btn-lg">Contact Us</a>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <footer>
+
+    <div class="footer-grid">
+
+      <div>
+
+        <a href="index.html" class="nav-brand" style="display:inline-flex"><div class="nav-brand-logo"><img src="images/enactus-logo.svg" alt="Enactus" width="22" height="22"></div><div class="nav-brand-text"><div class="nav-brand-name">Enactus MPSTME</div><div class="nav-brand-sub">NMIMS Mumbai</div></div></a>
+
+        <p class="footer-about-desc">Student-driven ventures creating sustainable livelihoods and environmental change at NMIMS MPSTME, Mumbai.</p>
+
+        <div class="footer-socials"><a href="https://www.linkedin.com/company/enactus-mpstme/" target="_blank" rel="noopener" class="footer-social"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></a><a href="https://www.instagram.com/en.mpstme/" target="_blank" rel="noopener" class="footer-social"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zM17.5 6.5h.01"/></svg></a></div>
+
+      </div>
+
+      <div><div class="footer-col-title">Navigate</div><div class="footer-links"><a href="index.html">Home</a><a href="about.html">About Us</a><a href="team.html">Team</a><a href="alumni.html">Alumni</a><a href="history.html">History</a></div></div>
+
+      <div><div class="footer-col-title">Projects</div><div class="footer-links"><a href="shilpkaar.html">Shilpkaar</a><a href="rupaantar.html">Rupaantar</a><a href="agrilink.html">AgriLink 360</a><a href="projects.html">All Projects</a></div></div>
+
+      <div><div class="footer-col-title">Contact</div><div class="footer-links"><a href="mailto:enactus.nmims@gmail.com">enactus.nmims@gmail.com</a><a href="tel:+918291001563">+91 82910 01563</a><a href="contact.html">Get in Touch</a></div></div>
+
+    </div>
+
+    <div class="footer-bottom"><div class="footer-copy">&copy; 2025 Enactus MPSTME &middot; <span>Business Thinking. Social Impact.</span></div></div>
+
+  </footer>
+
+</div>
+
+<script src="shared.js"></script>
+
+</body>
+
+</html>
+
+

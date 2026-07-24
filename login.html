@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login - Enactus MPSTME</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at center, #0C0C0C 0%, #050505 100%);
+    }
+    .login-card {
+      width: 100%;
+      max-width: 400px;
+      padding: 48px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(24px);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--r-lg);
+      text-align: center;
+      box-shadow: var(--shadow-lg);
+    }
+    .login-logo {
+      width: 54px;
+      height: 54px;
+      background: var(--yellow);
+      border-radius: var(--r-sm);
+      margin: 0 auto 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .login-title {
+      font-family: var(--font-serif);
+      font-size: 28px;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+    .login-sub {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 32px;
+    }
+    .login-btn {
+      width: 100%;
+      margin-top: 12px;
+      justify-content: center;
+    }
+    .error-msg {
+      color: #FF4D4D;
+      font-size: 13px;
+      margin-top: 16px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-card reveal">
+    <div class="login-logo">
+      <img src="images/enactus-logo.svg" alt="Enactus" width="30">
+    </div>
+    <h1 class="login-title">Admin <span>Portal</span></h1>
+    <p class="login-sub">Please enter your credentials to continue.</p>
+    
+    <div class="form-group" style="text-align: left">
+      <label class="form-label">Password</label>
+      <input type="password" id="adminPass" class="form-control" placeholder="••••••••" onkeydown="if(event.key==='Enter') tryLogin()">
+    </div>
+    
+    <button onclick="tryLogin()" class="btn btn-yellow login-btn">Sign In</button>
+    <div id="loginError" class="error-msg">Incorrect password. Please try again.</div>
+    
+    <a href="index.html" style="display: block; margin-top: 24px; font-size: 13px; color: var(--text-muted); text-decoration: none">Back to Site</a>
+  </div>
+
+  <script src="shared.js"></script>
+  <script>
+    function tryLogin() {
+      const pass = document.getElementById('adminPass').value;
+      const error = document.getElementById('loginError');
+      if (login(pass)) {
+        error.style.display = 'none';
+      } else {
+        error.style.display = 'block';
+        document.getElementById('adminPass').value = '';
+      }
+    }
+  </script>
+</body>
+</html>

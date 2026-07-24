@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Enactus MPSTME</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    :root {
+      --admin-sidebar-w: 260px;
+    }
+    body { background: var(--obsidian); display: flex; min-height: 100vh; }
+    
+    .admin-sidebar {
+      width: var(--admin-sidebar-w);
+      background: var(--onyx);
+      border-right: 1px solid var(--onyx-border);
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      height: 100vh;
+    }
+    .admin-main {
+      margin-left: var(--admin-sidebar-w);
+      flex: 1;
+      padding: 48px;
+    }
+    .dash-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+    .dash-title { font-family: var(--font-serif); font-size: 32px; color: var(--text-primary); }
+    .dash-title span { color: var(--yellow); }
+    
+    .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 48px; }
+    .stat-card {
+      background: var(--onyx-mid);
+      border: 1px solid var(--onyx-border);
+      border-radius: var(--r);
+      padding: 24px;
+      transition: all 0.3s ease;
+    }
+    .stat-card:hover { transform: translateY(-4px); border-color: var(--yellow); }
+    .stat-val { font-family: var(--font-serif); font-size: 36px; font-weight: 700; color: var(--yellow); }
+    .stat-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
+    
+    .subs-table-wrap {
+      background: var(--onyx-mid);
+      border: 1px solid var(--onyx-border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    table { width: 100%; border-collapse: collapse; }
+    th {
+      background: rgba(255,255,255,0.02);
+      padding: 18px 24px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--onyx-border);
+    }
+    td {
+      padding: 20px 24px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      border-bottom: 1px solid var(--onyx-border);
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255,255,255,0.01); }
+    
+    .status-badge {
+      padding: 4px 10px;
+      border-radius: 100px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .status-new { background: var(--yellow-pale); color: var(--yellow); border: 1px solid var(--yellow-glow); }
+    .status-read { background: rgba(255,255,255,0.05); color: var(--text-muted); border: 1px solid var(--onyx-border); }
+    
+    .action-btn {
+      padding: 6px 12px;
+      border-radius: var(--r-xs);
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-right: 6px;
+    }
+    .btn-read { background: var(--onyx-hover); color: var(--text-primary); }
+    .btn-del { background: rgba(255,77,77,0.1); color: #FF4D4D; }
+    .btn-del:hover { background: #FF4D4D; color: white; }
+
+    .empty-state { padding: 80px; text-align: center; color: var(--text-muted); }
+  </style>
+</head>
+<body>
+
+  <aside class="admin-sidebar">
+    <a href="index.html" class="nav-brand" style="margin-bottom: 48px">
+      <div class="nav-brand-logo"><img src="images/enactus-logo.svg" alt="Logo" width="20"></div>
+      <div class="nav-brand-text">
+        <div class="nav-brand-name">Enactus MPSTME</div>
+        <div class="nav-brand-sub">Admin Dashboard</div>
+      </div>
+    </a>
+    
+    <nav style="display: flex; flex-direction: column; gap: 8px">
+      <a href="#" class="btn btn-dark" style="justify-content: flex-start; background: var(--yellow-pale); border-color: var(--yellow); color: var(--yellow)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 10px"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="M22 6l-10 7L2 6"/></svg>
+        Submissions
+      </a>
+      <a href="index.html" class="btn btn-dark" style="justify-content: flex-start; opacity: 0.6">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 10px"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        View Website
+      </a>
+    </nav>
+    
+    <button onclick="logout()" class="btn btn-outline" style="margin-top: auto; border-color: #FF4D4D; color: #FF4D4D">Logout</button>
+  </aside>
+
+  <main class="admin-main">
+    <div class="dash-header">
+      <h1 class="dash-title">Inquiry <span>Dashboard</span></h1>
+      <button onclick="exportCSV()" class="btn btn-outline">Export CSV</button>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div id="totalSubs" class="stat-val">0</div>
+        <div class="stat-label">Total Submissions</div>
+      </div>
+      <div class="stat-card">
+        <div id="newSubs" class="stat-val">0</div>
+        <div class="stat-label">New Messages</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val">100%</div>
+        <div class="stat-label">Response Rate</div>
+      </div>
+    </div>
+
+    <div class="subs-table-wrap">
+      <table id="subsTable">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Name</th>
+            <th>Interest</th>
+            <th>Message</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="subsBody">
+          <!-- Submissions will be injected here -->
+        </tbody>
+      </table>
+      <div id="emptyState" class="empty-state" style="display: none">
+        No submissions found. Your contact form data will appear here.
+      </div>
+    </div>
+  </main>
+
+  <script src="shared.js"></script>
+  <script>
+    // Security check
+    checkAuth();
+
+    function renderSubmissions() {
+      const subs = getSubmissions();
+      const body = document.getElementById('subsBody');
+      const empty = document.getElementById('emptyState');
+      const table = document.getElementById('subsTable');
+      
+      document.getElementById('totalSubs').innerText = subs.length;
+      document.getElementById('newSubs').innerText = subs.filter(s => s.status === 'new').length;
+
+      if (subs.length === 0) {
+        body.innerHTML = '';
+        empty.style.display = 'block';
+        table.style.display = 'none';
+        return;
+      }
+
+      empty.style.display = 'none';
+      table.style.display = 'table';
+      
+      body.innerHTML = subs.map(s => `
+        <tr>
+          <td style="white-space:nowrap">${s.date}</td>
+          <td>
+            <div style="font-weight:600; color:var(--text-primary)">${s.ffname} ${s.flname}</div>
+            <div style="font-size:12px; color:var(--text-muted)">${s.femail}</div>
+          </td>
+          <td><span style="font-size:12px">${s.finterest || 'General'}</span></td>
+          <td title="${s.fmessage}"><div style="max-width:240px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap">${s.fmessage}</div></td>
+          <td><span class="status-badge status-${s.status}">${s.status}</span></td>
+          <td>
+            <div style="display:flex">
+              ${s.status === 'new' ? `<button onclick="markRead(${s.id})" class="action-btn btn-read">Mark Read</button>` : ''}
+              <button onclick="delSub(${s.id})" class="action-btn btn-del">Delete</button>
+            </div>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function markRead(id) {
+      updateSubmission(id, { status: 'read' });
+      renderSubmissions();
+    }
+
+    function delSub(id) {
+      if (confirm('Are you sure you want to delete this submission?')) {
+        deleteSubmission(id);
+        renderSubmissions();
+      }
+    }
+
+    function exportCSV() {
+      const subs = getSubmissions();
+      if (!subs.length) return alert('No data to export');
+      const headers = ['Date', 'First Name', 'Last Name', 'Email', 'Organisation', 'Interest', 'Message'];
+      const rows = subs.map(s => [s.date, s.ffname, s.flname, s.femail, s.forg, s.finterest, s.fmessage]);
+      let csvContent = "data:text/csv;charset=utf-8," + headers.join(",") + "\n" + rows.map(r => r.map(cell => `"${cell}"`).join(",")).join("\n");
+      const link = document.createElement("a");
+      link.setAttribute("href", encodeURI(csvContent));
+      link.setAttribute("download", "enactus_submissions.csv");
+      document.body.appendChild(link);
+      link.click();
+    }
+
+    renderSubmissions();
+  </script>
+</body>
+</html>
