@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
@@ -208,6 +207,305 @@
     .achievement-text strong {
       color: var(--yellow);
     }
+
+    /* ─── PRODUCTS CARD CLICKABLE ──────────────────────────── */
+    .info-card-clickable {
+      cursor: pointer;
+      position: relative;
+    }
+    .info-card-clickable::after {
+      content: '📷 View Gallery';
+      position: absolute;
+      bottom: 10px;
+      right: 12px;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--yellow);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .info-card-clickable:hover::after {
+      opacity: 1;
+    }
+    .info-card-clickable:hover {
+      border-color: var(--yellow) !important;
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(255, 209, 0, 0.15);
+    }
+
+    /* ─── PRODUCT GALLERY SECTION ──────────────────────────── */
+    .rupa-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 36px;
+    }
+    @media (max-width: 768px) {
+      .rupa-gallery-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .rupa-gallery-grid { grid-template-columns: 1fr; }
+    }
+    .rupa-gallery-item {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      cursor: pointer;
+      border: 1px solid rgba(45, 106, 79, 0.2);
+      transition: all 0.3s ease;
+    }
+    .rupa-gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+      display: block;
+    }
+    .rupa-gallery-item:hover {
+      border-color: #52B788;
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(45, 106, 79, 0.3);
+    }
+    .rupa-gallery-item:hover img {
+      transform: scale(1.06);
+    }
+    .rupa-gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(13, 46, 28, 0.85) 0%, transparent 60%);
+      display: flex;
+      align-items: flex-end;
+      padding: 16px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .rupa-gallery-item:hover .rupa-gallery-overlay {
+      opacity: 1;
+    }
+    .rupa-gallery-label {
+      font-family: var(--font-head);
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.04em;
+    }
+    .rupa-gallery-zoom {
+      margin-left: auto;
+      width: 32px;
+      height: 32px;
+      background: rgba(255, 209, 0, 0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0D2E1C;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    /* ─── LIGHTBOX MODAL ──────────────────────────── */
+    .rupa-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(5, 15, 10, 0.97);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: flex-start;
+    }
+    .rupa-modal.open {
+      display: flex;
+      animation: rupaFadeIn 0.25s ease;
+    }
+    @keyframes rupaFadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    .rupa-modal-header {
+      flex-shrink: 0;
+      padding: 20px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(45, 106, 79, 0.2);
+      background: rgba(13, 46, 28, 0.6);
+      z-index: 2;
+    }
+    .rupa-modal-title {
+      font-family: var(--font-head);
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .rupa-modal-title span {
+      color: #52B788;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .rupa-modal-close {
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50%;
+      background: transparent;
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .rupa-modal-close:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: #52B788;
+    }
+    .rupa-modal-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 32px;
+      box-sizing: border-box;
+    }
+    .rupa-modal-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    @media (max-width: 900px) {
+      .rupa-modal-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 540px) {
+      .rupa-modal-grid { grid-template-columns: 1fr; }
+      .rupa-modal-body { padding: 24px 16px; }
+    }
+    .rupa-modal-card {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(45, 106, 79, 0.25);
+      background: rgba(27, 67, 50, 0.3);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .rupa-modal-card:hover {
+      border-color: #52B788;
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(45, 106, 79, 0.3);
+    }
+    .rupa-modal-card img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .rupa-modal-card:hover img {
+      transform: scale(1.04);
+    }
+    .rupa-modal-card-info {
+      padding: 14px 16px;
+    }
+    .rupa-modal-card-name {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 14px;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .rupa-modal-card-tag {
+      font-size: 11px;
+      color: #52B788;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    /* ─── SINGLE IMAGE LIGHTBOX ──────────────────────────── */
+    .rupa-imgbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: rgba(0,0,0,0.95);
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .rupa-imgbox.open { display: flex; animation: rupaFadeIn 0.2s ease; }
+    .rupa-imgbox img {
+      max-width: 90vw;
+      max-height: 85vh;
+      object-fit: contain;
+      border-radius: 12px;
+      border: 1px solid rgba(82,183,136,0.3);
+      transition: opacity 0.15s ease;
+    }
+    .rupa-imgbox-close {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50%;
+      background: transparent;
+      color: #fff;
+      font-size: 22px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .rupa-imgbox-close:hover { background: rgba(255,255,255,0.1); }
+    .rupa-imgbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50%;
+      background: rgba(13,46,28,0.7);
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .rupa-imgbox-nav:hover { background: #2D6A4F; border-color: #52B788; }
+    .rupa-imgbox-prev { left: 20px; }
+    .rupa-imgbox-next { right: 20px; }
+    .rupa-imgbox-caption {
+      margin-top: 16px;
+      font-family: var(--font-head);
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+      letter-spacing: 0.04em;
+    }
+    .rupa-imgbox-counter {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: var(--font-head);
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
   </style>
 
 </head>
@@ -275,7 +573,7 @@
 
       <div class="container page-hero-inner">
 
-        <div class="page-hero-eyebrow reveal" style="color:#52B788">Project Rupaantar Â· Agro-Waste Â· Eco-Paper</div>
+        <div class="page-hero-eyebrow reveal" style="color:#52B788">Project Rupaantar · Agro-Waste · Eco-Paper</div>
 
         <h1 class="page-hero-title reveal">Turning Waste <span style="color:#52B788">Into Wealth</span></h1>
 
@@ -428,7 +726,7 @@
 
               </div>
 
-              <div class="info-card" style="border-top:3px solid var(--yellow)">
+              <div class="info-card info-card-clickable" style="border-top:3px solid var(--yellow)" onclick="openProductGallery()" id="productsCard" title="Click to view product gallery">
 
                 <span class="info-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                     <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor"
@@ -436,7 +734,7 @@
                     <path d="M14 2v6h6" stroke="currentColor" stroke-width="2" />
                   </svg></span>
 
-                <div class="info-card-title">Products</div>
+                <div class="info-card-title">Products <span style="font-size:11px;color:#52B788;font-weight:600;vertical-align:middle">↗ Gallery</span></div>
 
                 <div class="info-card-text">Greeting cards, notebooks, decorative items, stationery - sustainable and
                   high quality.</div>
@@ -862,7 +1160,148 @@
 
   </div>
 
+  <!-- PRODUCT GALLERY MODAL -->
+  <div class="rupa-modal" id="rupaModal" role="dialog" aria-modal="true" aria-label="Rupaantar Product Gallery">
+    <div class="rupa-modal-header">
+      <div class="rupa-modal-title">
+        🌿 Rupaantar Products
+        <span>Handcrafted Eco-Paper</span>
+      </div>
+      <button class="rupa-modal-close" onclick="closeProductGallery()" aria-label="Close gallery">&#x2715;</button>
+    </div>
+    <div class="rupa-modal-body">
+      <div class="rupa-modal-grid">
+        <div class="rupa-modal-card" onclick="openImgBox(0)">
+          <img src="images/rupa-product-1.jpeg" alt="Warli Art Notebook" loading="lazy">
+          <div class="rupa-modal-card-info">
+            <div class="rupa-modal-card-name">Warli Art Notebook</div>
+            <div class="rupa-modal-card-tag">RICE HUSK ECO-PAPER &middot; HANDMADE</div>
+          </div>
+        </div>
+
+        <div class="rupa-modal-card" onclick="openImgBox(1)">
+          <img src="images/rupa-product-2.jpeg" alt="Rupaantar Branded Notebook" loading="lazy">
+          <div class="rupa-modal-card-info">
+            <div class="rupa-modal-card-name">Warli Art Notebook</div>
+            <div class="rupa-modal-card-tag">RICE HUSK ECO-PAPER &middot; HANDMADE</div>
+          </div>
+        </div>
+
+        <div class="rupa-modal-card" onclick="openImgBox(2)">
+         <img src="images/rupa-product-3.jpeg" alt="NMIMS Branded Notebook" loading="lazy">
+          <div class="rupa-modal-card-info">
+            <div class="rupa-modal-card-name">NMIMS Edition — Peacock Art</div>
+            <div class="rupa-modal-card-tag">CORPORATE GIFTING &middot; CUSTOM PRINT</div>
+          </div>
+        </div>
+
+        <div class="rupa-modal-card" onclick="openImgBox(3)">
+          <img src="images/rupa-product-4.jpeg" alt="NMIMS Notebook Angled" loading="lazy">
+          <div class="rupa-modal-card-info">
+            <div class="rupa-modal-card-name">NMIMS Edition — Peacock Art</div>
+            <div class="rupa-modal-card-tag">CORPORATE GIFTING &middot; CUSTOM PRINT</div>
+          </div>
+        </div>
+
+        <div class="rupa-modal-card" onclick="openImgBox(4)">
+          <img src="images/rupa-product-5.jpeg" alt="Mandala Art Notebook" loading="lazy">
+          <div class="rupa-modal-card-info">
+            <div class="rupa-modal-card-name">Mandala Art Notebook</div>
+            <div class="rupa-modal-card-tag">Rupaantar &times; Enactus MPSTME</div>
+          </div>
+        </div>
+
+        <div class="rupa-modal-card" onclick="openImgBox(5)">
+          <img src="images/rupa-product-6.jpeg" alt="Packaged Products" loading="lazy">
+          <div class="rupa-modal-card-info">
+            <div class="rupa-modal-card-name">Packaged — Ready to Gift</div>
+            <div class="rupa-modal-card-tag">Jute Twine &middot; Branded Sticker</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- SINGLE IMAGE LIGHTBOX -->
+  <div class="rupa-imgbox" id="rupaImgBox">
+    <button class="rupa-imgbox-close" onclick="closeImgBox()" aria-label="Close">&#x2715;</button>
+    <button class="rupa-imgbox-nav rupa-imgbox-prev" onclick="navImg(-1)" aria-label="Previous">&#8592;</button>
+    <img id="rupaImgBoxSrc" src="" alt="Product photo">
+    <div class="rupa-imgbox-caption" id="rupaImgBoxCaption"></div>
+    <button class="rupa-imgbox-nav rupa-imgbox-next" onclick="navImg(1)" aria-label="Next">&#8594;</button>
+    <div class="rupa-imgbox-counter" id="rupaImgBoxCounter"></div>
+  </div>
+
   <script src="shared.js"></script>
+  <script>
+    /* ── Product Gallery Modal ── */
+    var rupaPhotos = [
+      { src: 'images/rupa-product-6.jpg.jpeg', caption: 'Packaged & Ready to Gift' }
+    ];
+    var currentImg = 0;
+
+    function openProductGallery() {
+      document.getElementById('rupaModal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeProductGallery() {
+      document.getElementById('rupaModal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function openImgBox(idx) {
+      currentImg = idx;
+      document.getElementById('rupaImgBoxSrc').src = rupaPhotos[idx].src;
+      document.getElementById('rupaImgBoxCaption').textContent = rupaPhotos[idx].caption;
+      document.getElementById('rupaImgBoxCounter').textContent = (idx + 1) + ' / ' + rupaPhotos.length;
+      document.getElementById('rupaImgBox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeImgBox() {
+      document.getElementById('rupaImgBox').classList.remove('open');
+      /* Re-open gallery if it was open */
+      if (document.getElementById('rupaModal').classList.contains('open')) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    }
+    function navImg(dir) {
+      currentImg = (currentImg + dir + rupaPhotos.length) % rupaPhotos.length;
+      var imgEl = document.getElementById('rupaImgBoxSrc');
+      imgEl.style.opacity = 0;
+      setTimeout(function() {
+        imgEl.src = rupaPhotos[currentImg].src;
+        document.getElementById('rupaImgBoxCaption').textContent = rupaPhotos[currentImg].caption;
+        document.getElementById('rupaImgBoxCounter').textContent = (currentImg + 1) + ' / ' + rupaPhotos.length;
+        imgEl.style.opacity = 1;
+      }, 150);
+    }
+
+    /* Close modals on Escape key */
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        if (document.getElementById('rupaImgBox').classList.contains('open')) {
+          closeImgBox();
+        } else if (document.getElementById('rupaModal').classList.contains('open')) {
+          closeProductGallery();
+        }
+      }
+      if (document.getElementById('rupaImgBox').classList.contains('open')) {
+        if (e.key === 'ArrowRight') navImg(1);
+        if (e.key === 'ArrowLeft') navImg(-1);
+      }
+    });
+
+    /* Close gallery modal on backdrop click */
+    document.getElementById('rupaModal').addEventListener('click', function(e) {
+      if (e.target === this) closeProductGallery();
+    });
+    document.getElementById('rupaImgBox').addEventListener('click', function(e) {
+      if (e.target === this) closeImgBox();
+    });
+  </script>
 
 </body>
 
