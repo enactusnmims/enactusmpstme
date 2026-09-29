@@ -1,60 +1,96 @@
-import os
-import glob
+#!/usr/bin/env python3
+"""Optimize gallery photos and (re)generate gallery-data.js.
+
+Run from repo root:  python3 tools/optimize-gallery.py
+Needs:               pip install Pillow
+
+Reads   images/rupa-product-1..6.jpeg  (notebooks, fixed captions)
+        images/gallery/{notebooks,shilpkaar,team,moments}/*
+Writes  images/gallery/opt/<id>-<name>-thumb.webp  (640px wide)
+        images/gallery/opt/<id>-<name>-full.webp   (1400px wide)
+        gallery-data.js  (real w/h of each thumb, empty sections skipped)
+Originals are never referenced by the page.
+"""
+import json, re
+from pathlib import Path
 from PIL import Image, ImageOps
 
-def process_images():
-    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    gallery_dir = os.path.join(base_dir, 'images', 'gallery')
-    opt_dir = os.path.join(gallery_dir, 'opt')
-    os.makedirs(opt_dir, exist_ok=True)
+ROOT = Path(__file__).resolve().parent.parent
+GAL = ROOT / 'images' / 'gallery'
+OPT = GAL / 'opt'
+EXT = {'.jpg', '.jpeg', '.png', '.webp'}
 
-    categories = ['notebooks', 'shilpkaar', 'team', 'moments']
-    
-    for cat in categories:
-        cat_dir = os.path.join(gallery_dir, cat)
-        if not os.path.exists(cat_dir):
+SECTIONS = [
+    dict(id='notebooks', folder='notebooks', title='The <i>Notebooks</i>', note='Project Rupaantar',
+         layout='natural', default='Rupaantar notebook'),
+    dict(id='shilpkaar', folder='shilpkaar', title='<i>Shilpkaar</i>', note='Project Shilpkaar',
+         layout='natural', default='Shilpkaar'),
+    dict(id='team', folder='team', title='Our <i>Team</i>', note='Enactus MPSTME',
+         layout='portrait', default='Team member'),
+    dict(id='moments', folder='moments', title='<i>Moments</i>', note='Trips and events',
+         layout='natural', default='Moment'),
+]
+
+# Existing Rupaantar photos, fixed captions in order.
+RUPA = [
+    ('Warli Art Notebook', ''), ('The Rupaantar Notebook', ''),
+    ('Peacock Art (NMIMS edition)', ''), ('Peacock, Second Angle', ''),
+    ('Mandala Notebook', 'Rupaantar x Enactus MPSTME'), ('Wrapped & Ready', ''),
+]
+
+CAMERA = re.compile(r'^(img|dsc|pxl|photo|wa|screenshot|image)?[-_ ]*[\d_\-\s]*$', re.I)
+
+def caption_from(stem, default):
+    if CAMERA.match(stem):
+        return default
+    s = re.sub(r'[-_]+', ' ', stem).strip()
+    return s[:1].upper() + s[1:]
+
+def save(src, key):
+    im = ImageOps.exif_transpose(Image.open(src))
+    if im.mode not in ('RGB', 'L'):
+        im = im.convert('RGB')
+    out = {}
+    for tag, width, q in (('thumb', 640, 78), ('full', 1400, 80)):
+        w = min(width, im.width)                      # never upscale
+        h = round(im.height * w / im.width)
+        p = OPT / f'{key}-{tag}.webp'
+        im.resize((w, h), Image.LANCZOS).save(p, 'WEBP', quality=q, method=6)
+        out[tag] = (p.relative_to(ROOT).as_posix(), w, h)
+    return out
+
+def item(paths, caption, meta):
+    t, f = paths['thumb'], paths['full']
+    return dict(thumb=t[0], full=f[0], w=t[1], h=t[2], caption=caption, meta=meta, alt=caption)
+
+def main():
+    OPT.mkdir(parents=True, exist_ok=True)
+    result, total = [], 0
+    for sec in SECTIONS:
+        items = []
+        if sec['id'] == 'notebooks':
+            for i, (cap, meta) in enumerate(RUPA, 1):
+                src = ROOT / 'images' / f'rupa-product-{i}.jpeg'
+                if src.exists():
+                    items.append(item(save(src, f'notebooks-rupa-{i}'), cap, meta))
+        folder = GAL / sec['folder']
+        if folder.is_dir():
+            for src in sorted(folder.iterdir()):
+                if src.suffix.lower() in EXT:
+                    cap = caption_from(src.stem, sec['default'])
+                    items.append(item(save(src, f"{sec['id']}-{src.stem}"), cap, ''))
+        if not items:
+            print(f"skip  {sec['id']} (no photos)")
             continue
-        
-        # Get all images in the category folder
-        files = glob.glob(os.path.join(cat_dir, '*.*'))
-        for f in files:
-            if not f.lower().endswith(('.png', '.jpg', '.jpeg', '.webp')):
-                continue
-                
-            name = os.path.splitext(os.path.basename(f))[0]
-            thumb_path = os.path.join(opt_dir, f"{name}-thumb.webp")
-            full_path = os.path.join(opt_dir, f"{name}-full.webp")
-            
-            try:
-                with Image.open(f) as img:
-                    # Apply EXIF rotation
-                    img = ImageOps.exif_transpose(img)
-                    
-                    # Convert to RGB if needed
-                    if img.mode in ('RGBA', 'P'):
-                        img = img.convert('RGB')
-                    
-                    w, h = img.size
-                    
-                    # Full size (1400px)
-                    if w > 1400:
-                        new_h = int(h * (1400 / w))
-                        full_img = img.resize((1400, new_h), Image.Resampling.LANCZOS)
-                    else:
-                        full_img = img
-                    full_img.save(full_path, 'WEBP', quality=80)
-                    
-                    # Thumb size (640px)
-                    if w > 640:
-                        new_h = int(h * (640 / w))
-                        thumb_img = img.resize((640, new_h), Image.Resampling.LANCZOS)
-                    else:
-                        thumb_img = img
-                    thumb_img.save(thumb_path, 'WEBP', quality=78)
-                    
-                    print(f"Processed: {f}")
-            except Exception as e:
-                print(f"Error processing {f}: {e}")
+        print(f"ok    {sec['id']}: {len(items)} photos")
+        total += sum((ROOT / it['thumb']).stat().st_size for it in items)
+        result.append(dict(id=sec['id'], title=sec['title'], note=sec['note'],
+                           layout=sec['layout'], items=items))
+    (ROOT / 'gallery-data.js').write_text(
+        '/* Generated by tools/optimize-gallery.py. Re-run it after adding photos. */\n'
+        'const gallerySections = ' + json.dumps(result, indent=1, ensure_ascii=False) + ';\n',
+        encoding='utf-8')
+    print(f'thumbs total: {total/1024/1024:.2f} MB')
 
-if __name__ == "__main__":
-    process_images()
+if __name__ == '__main__':
+    main()
