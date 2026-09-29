@@ -451,7 +451,8 @@ function deleteSubmission(id) {
 function initTimelineCurve() {
   const body = document.querySelector('.timeline-body');
   if (!body) return;
-  body.classList.add('has-curve');
+  try {
+    body.classList.add('has-curve');
 
   const TL_PHOTOS = {
     y2012: [],
@@ -477,10 +478,11 @@ function initTimelineCurve() {
     const desc = item.querySelector('.timeline-desc');
     const dot = item.querySelector('.timeline-dot');
     
+    const yearOnly = badge.textContent.split('-')[0].trim();
     const textBlock = document.createElement('div');
     textBlock.className = 'tl-text';
     textBlock.innerHTML = `
-      <div class="tl-ghost-year" aria-hidden="true">${badge.textContent}</div>
+      <div class="tl-ghost-year" aria-hidden="true">${yearOnly}</div>
       <div class="tl-heading-row">
         <div class="tl-ring"></div>
         <div>
@@ -491,6 +493,10 @@ function initTimelineCurve() {
       <div class="tl-dash-sub"></div>
       ${desc.outerHTML}
     `;
+    
+    badge.remove();
+    title.remove();
+    desc.remove();
     
     const photoBlock = document.createElement('div');
     photoBlock.className = 'tl-photo';
@@ -535,7 +541,7 @@ function initTimelineCurve() {
   let svg = body.querySelector('.tl-svg');
   if (!svg) {
     svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.className = 'tl-svg';
+    svg.setAttribute('class', 'tl-svg');
     svg.setAttribute('aria-hidden', 'true');
     svg.innerHTML = `
       <defs>
@@ -577,22 +583,26 @@ function initTimelineCurve() {
       const branch = item.querySelector('.tl-branch');
       const y = item.offsetTop + item.offsetHeight / 2;
       const x = isMobile ? lineCx : (i % 2 === 0 ? lineCx - A : lineCx + A);
-      dot.style.left = x + 'px';
-      dot.style.top = y + 'px';
       
-      branch.style.top = y + 'px';
+      const localX = x - item.offsetLeft;
+      const localY = item.offsetHeight / 2;
+      
+      dot.style.setProperty('--dot-x', localX);
+      dot.style.setProperty('--dot-y', localY);
+      
+      branch.style.top = localY + 'px';
       if (isMobile) {
-        branch.style.left = x + 'px';
+        branch.style.left = localX + 'px';
         branch.style.width = '30px';
         branch.style.transformOrigin = 'left center';
       } else {
         const branchW = Math.max(30, vw * 0.08);
         branch.style.width = branchW + 'px';
         if (i % 2 === 0) {
-          branch.style.left = (x - branchW) + 'px';
+          branch.style.left = (localX - branchW) + 'px';
           branch.style.transformOrigin = 'right center';
         } else {
-          branch.style.left = x + 'px';
+          branch.style.left = localX + 'px';
           branch.style.transformOrigin = 'left center';
         }
       }
@@ -619,7 +629,8 @@ function initTimelineCurve() {
     
     pathLen = track.getTotalLength();
     prog.style.strokeDasharray = pathLen;
-    prog.style.strokeDashoffset = pathLen;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    prog.style.strokeDashoffset = reduceMotion ? 0 : pathLen;
     svg.style.height = (last.y + 250) + 'px';
   }
   
@@ -684,6 +695,11 @@ function initTimelineCurve() {
     });
   }, { threshold: 0.4 });
   items.forEach(i => obs.observe(i));
+  body.classList.add('tl-ready');
+  } catch(err) {
+    console.error('Timeline scrollytelling error:', err);
+    body.classList.remove('has-curve', 'tl-ready');
+  }
 }
 
 function enhanceTeamCards() {
