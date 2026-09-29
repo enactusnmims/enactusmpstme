@@ -601,18 +601,18 @@ function initTimelineCurve() {
     
     if (pts.length === 0) return;
     
-    d += \`M \${lineCx} 0 L \${lineCx} \${Math.max(0, pts[0].y - 150)} \`;
-    d += \`C \${lineCx} \${pts[0].y - 50}, \${pts[0].x} \${pts[0].y - 50}, \${pts[0].x} \${pts[0].y} \`;
+    d += `M ${lineCx} 0 L ${lineCx} ${Math.max(0, pts[0].y - 150)} `;
+    d += `C ${lineCx} ${pts[0].y - 50}, ${pts[0].x} ${pts[0].y - 50}, ${pts[0].x} ${pts[0].y} `;
     
     for (let i = 0; i < pts.length - 1; i++) {
       const p1 = pts[i], p2 = pts[i+1];
       const my = (p1.y + p2.y) / 2;
-      d += \`C \${p1.x} \${my}, \${p2.x} \${my}, \${p2.x} \${p2.y} \`;
+      d += `C ${p1.x} ${my}, ${p2.x} ${my}, ${p2.x} ${p2.y} `;
     }
     
     const last = pts[pts.length-1];
-    d += \`C \${last.x} \${last.y + 50}, \${lineCx} \${last.y + 50}, \${lineCx} \${last.y + 100} \`;
-    d += \`Q \${lineCx-20} \${last.y + 130}, \${lineCx+10} \${last.y + 150} T \${lineCx} \${last.y + 200}\`;
+    d += `C ${last.x} ${last.y + 50}, ${lineCx} ${last.y + 50}, ${lineCx} ${last.y + 100} `;
+    d += `Q ${lineCx-20} ${last.y + 130}, ${lineCx+10} ${last.y + 150} T ${lineCx} ${last.y + 200}`;
     
     track.setAttribute('d', d);
     prog.setAttribute('d', d);
