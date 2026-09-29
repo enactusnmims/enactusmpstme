@@ -3,9 +3,6 @@ import re
 with open('style.css', 'r', encoding='utf-8') as f:
     css = f.read()
 
-# We need to replace the block starting at /* ─── TIMELINE ────────────────────────────────────────────── */
-# up to just before /* ─── PHASE CARDS ─────────────────────────────────────────── */
-
 new_css = """/* ─── TIMELINE ────────────────────────────────────────────── */
 .timeline-wrap { display:grid; grid-template-columns:200px 1fr; gap:64px; align-items:start; }
 .timeline-wrap.story-layout { display:block; position:relative; max-width:1180px; margin:0 auto; }
@@ -64,6 +61,9 @@ new_css = """/* ─── TIMELINE ───────────────
   display:grid; grid-template-columns:1fr 1fr; gap:calc(var(--tl-a, 80px) * 2 + 96px);
   align-items:center; margin-bottom:120px;
 }
+.timeline-body:not(.tl-ready) .story-layout .timeline-item {
+  gap:64px;
+}
 
 /* Dots */
 .timeline-dot {
@@ -73,6 +73,9 @@ new_css = """/* ─── TIMELINE ───────────────
   width:20px; height:20px; border-radius:50%;
   background:var(--obsidian); border:2px solid rgba(255,255,255,.2);
   transition:all 0.3s ease-out; z-index:2;
+}
+.timeline-body:not(.tl-ready) .timeline-dot {
+  left:calc(var(--tl-gutter) / 2); top:16px;
 }
 .timeline-dot::before {
   content:''; position:absolute; inset:-4px; border-radius:50%;
@@ -100,13 +103,17 @@ new_css = """/* ─── TIMELINE ───────────────
 
 /* Text Block */
 .tl-text {
-  position:relative; opacity:calc(var(--p, 0) * 3);
+  position:relative; z-index:2;
+}
+.timeline-body.tl-ready .tl-text {
+  opacity:clamp(0.55, calc(var(--p, 0) * 2.5), 1);
   transform:translateY(calc((1 - var(--p, 0)) * 40px));
-  z-index:2;
 }
 .tl-ghost-year {
   position:absolute; top:-60px; left:-20px; font-size:140px; font-family:var(--font-serif);
   color:transparent; -webkit-text-stroke:1px rgba(255,255,255,0.05); z-index:-1; pointer-events:none;
+}
+.timeline-body.tl-ready .tl-ghost-year {
   transform:translateY(calc((var(--p, 0) - 0.5) * -80px));
 }
 .tl-heading-row { display:flex; gap:16px; align-items:flex-start; }
@@ -138,20 +145,22 @@ new_css = """/* ─── TIMELINE ───────────────
   display:flex; align-items:center; justify-content:center;
   position:relative; overflow:hidden;
   box-shadow:0 10px 30px rgba(0,0,0,0.5);
-  
+}
+.timeline-body.tl-ready .tl-card {
   --t-p: clamp(0, calc(var(--p, 0) * 1.5), 1);
-  opacity:var(--t-p);
+  opacity:clamp(0.55, var(--t-p), 1);
   transform:translateX(calc((1 - var(--t-p)) * var(--slide-dir, 60px))) rotate(calc(var(--card-end-r, -2deg) + (1 - var(--t-p)) * 10deg));
   transition: opacity 0.1s, transform 0.1s;
 }
 .timeline-item:nth-child(even) .tl-card { --slide-dir:-60px; --card-end-r:2deg; }
 .timeline-item:nth-child(odd) .tl-card { --slide-dir:60px; --card-end-r:-2deg; }
 
-.tl-card.offset {
+.timeline-body.tl-ready .tl-card.offset {
   position:absolute; top:20px; left:-20px; width:80%; z-index:-1;
-  --card-end-r:-8deg; opacity:calc(var(--t-p) * 0.6);
+  --card-end-r:-8deg; opacity:clamp(0.55, calc(var(--t-p) * 0.6), 1);
   transform:translateX(calc((1 - var(--t-p)) * var(--slide-dir, 60px))) rotate(calc(var(--card-end-r) + (1 - var(--t-p)) * 14deg));
 }
+.timeline-body:not(.tl-ready) .tl-card.offset { display:none; }
 
 .tl-card.placeholder .tl-card-inner {
   position:absolute; inset:10px; border:1px dashed rgba(255,209,0,0.3);
@@ -162,12 +171,16 @@ new_css = """/* ─── TIMELINE ───────────────
 
 .tl-branch {
   position:absolute; height:2px; background:rgba(255,209,0,0.3); z-index:1; pointer-events:none;
+}
+.timeline-body.tl-ready .tl-branch {
   transform:scaleX(var(--t-p)); transition:transform 0.1s;
 }
+.timeline-body:not(.tl-ready) .tl-branch { display:none; }
 
 /* Responsive */
 @media (max-width: 900px) {
   .story-layout .timeline-item { gap:calc(var(--tl-a, 40px) * 2 + 40px); }
+  .timeline-body:not(.tl-ready) .story-layout .timeline-item { gap:40px; }
   .tl-card { border-width: 1px; }
   .tl-ghost-year { font-size:100px; top:-40px; }
 }

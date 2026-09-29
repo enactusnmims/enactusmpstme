@@ -1394,13 +1394,13 @@ footer::before {
   pointer-events: none;
 }
 
-.slide-agrilink {
+.slide-krishividhan {
   background:
     radial-gradient(ellipse at 30% 70%, rgba(116,198,157,0.3) 0%, transparent 55%),
     radial-gradient(ellipse at 70% 30%, rgba(255,209,0,0.1) 0%, transparent 50%),
     linear-gradient(135deg, #080D0A 0%, #0D1510 50%, #0A0A0C 100%);
 }
-.slide-agrilink::before {
+.slide-krishividhan::before {
   content: '';
   position: absolute;
   inset: 0;
