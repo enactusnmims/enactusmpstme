@@ -448,34 +448,242 @@ function deleteSubmission(id) {
   localStorage.setItem('enactus_submissions', JSON.stringify(filtered));
 }
 
-function initHistoryTimeline() {
+function initTimelineCurve() {
   const body = document.querySelector('.timeline-body');
-  if (!body || typeof gsap === 'undefined') return;
+  if (!body) return;
+  body.classList.add('has-curve');
 
-  const line = document.createElement('div');
-  line.className = 'timeline-draw-line';
-  line.style.position = 'absolute';
-  line.style.left = '0';
-  line.style.top = '8px';
-  line.style.bottom = '8px';
-  line.style.width = '2px';
-  line.style.background = 'var(--yellow)';
-  line.style.transformOrigin = 'top';
-  line.style.transform = 'scaleY(0)';
-  line.style.boxShadow = '0 0 10px rgba(255, 209, 0, 0.5)';
-  
-  body.appendChild(line);
-  
-  gsap.to(line, {
-    scaleY: 1,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: body,
-      start: 'top 60%',
-      end: 'bottom 80%',
-      scrub: true
+  const TL_PHOTOS = {
+    y2012: [],
+    y2015: [],
+    y2018: [],
+    y2019: [],
+    y2020: [],
+    y2021: [],
+    y2022: [],
+    y2025: []
+  };
+
+  const navWrap = document.querySelector('.timeline-wrap');
+  if (navWrap) navWrap.classList.add('story-layout');
+  document.querySelectorAll('.timeline-nav-item').forEach(item => {
+    item.textContent = item.dataset.target.replace('y', '');
+  });
+
+  const items = Array.from(body.querySelectorAll('.timeline-item'));
+  items.forEach((item, i) => {
+    const badge = item.querySelector('.timeline-year-badge');
+    const title = item.querySelector('.timeline-title');
+    const desc = item.querySelector('.timeline-desc');
+    const dot = item.querySelector('.timeline-dot');
+    
+    const textBlock = document.createElement('div');
+    textBlock.className = 'tl-text';
+    textBlock.innerHTML = `
+      <div class="tl-ghost-year" aria-hidden="true">${badge.textContent}</div>
+      <div class="tl-heading-row">
+        <div class="tl-ring"></div>
+        <div>
+          ${badge.outerHTML}
+          ${title.outerHTML}
+        </div>
+      </div>
+      <div class="tl-dash-sub"></div>
+      ${desc.outerHTML}
+    `;
+    
+    const photoBlock = document.createElement('div');
+    photoBlock.className = 'tl-photo';
+    
+    const photos = TL_PHOTOS[item.id] || [];
+    if (photos.length === 0) {
+      const p1 = document.createElement('div'); p1.className = 'tl-card placeholder';
+      p1.setAttribute('aria-label', 'Photo coming soon');
+      p1.innerHTML = `<div class="tl-card-inner"><svg aria-hidden="true" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg><span class="tl-card-year">${badge.textContent}</span></div>`;
+      photoBlock.appendChild(p1);
+      
+      if (i === 0) {
+        const p2 = document.createElement('div'); p2.className = 'tl-card placeholder offset';
+        p2.setAttribute('aria-label', 'Photo coming soon');
+        p2.innerHTML = p1.innerHTML;
+        photoBlock.appendChild(p2);
+      }
+    } else {
+      photos.forEach((p, idx) => {
+        const c = document.createElement('div');
+        c.className = 'tl-card real' + (idx === 1 ? ' offset' : '');
+        c.innerHTML = `<img src="${p.src}" alt="${p.alt}" width="${p.w}" height="${p.h}" style="width:100%;height:100%;object-fit:cover;" loading="lazy">`;
+        photoBlock.appendChild(c);
+      });
+    }
+    
+    const branch = document.createElement('div');
+    branch.className = 'tl-branch';
+    
+    item.innerHTML = '';
+    item.appendChild(branch);
+    item.appendChild(dot);
+    if (i % 2 === 0) {
+      item.appendChild(photoBlock);
+      item.appendChild(textBlock);
+    } else {
+      item.appendChild(textBlock);
+      item.appendChild(photoBlock);
     }
   });
+
+  let svg = body.querySelector('.tl-svg');
+  if (!svg) {
+    svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.className = 'tl-svg';
+    svg.setAttribute('aria-hidden', 'true');
+    svg.innerHTML = `
+      <defs>
+        <linearGradient id="tl-grad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="var(--yellow)" stop-opacity="0.3"/>
+          <stop offset="80%" stop-color="var(--yellow)"/>
+          <stop offset="100%" stop-color="transparent"/>
+        </linearGradient>
+        <filter id="tl-glow"><feGaussianBlur stdDeviation="4" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <path class="tl-track" d="" />
+      <path class="tl-progress" d="" />
+      <circle class="tl-head" cx="0" cy="0" r="6" filter="url(#tl-glow)" />
+    `;
+    body.insertBefore(svg, body.firstChild);
+  }
+  
+  const track = svg.querySelector('.tl-track');
+  const prog = svg.querySelector('.tl-progress');
+  const head = svg.querySelector('.tl-head');
+  let pathLen = 0;
+  
+  function drawPath() {
+    if (!body.classList.contains('has-curve')) return;
+    const bodyRect = body.getBoundingClientRect();
+    const cx = bodyRect.width / 2;
+    let vw = window.innerWidth;
+    let isMobile = vw <= 600;
+    
+    let A = Math.max(56, Math.min(110, vw * 0.09));
+    if (vw > 600 && vw <= 900) A = 40;
+    
+    let lineCx = cx;
+    if (isMobile) { A = 12; lineCx = 52; }
+    
+    let d = '';
+    const pts = items.map((item, i) => {
+      const dot = item.querySelector('.timeline-dot');
+      const branch = item.querySelector('.tl-branch');
+      const y = item.offsetTop + item.offsetHeight / 2;
+      const x = isMobile ? lineCx : (i % 2 === 0 ? lineCx - A : lineCx + A);
+      dot.style.left = x + 'px';
+      dot.style.top = y + 'px';
+      
+      branch.style.top = y + 'px';
+      if (isMobile) {
+        branch.style.left = x + 'px';
+        branch.style.width = '30px';
+        branch.style.transformOrigin = 'left center';
+      } else {
+        const branchW = Math.max(30, vw * 0.08);
+        branch.style.width = branchW + 'px';
+        if (i % 2 === 0) {
+          branch.style.left = (x - branchW) + 'px';
+          branch.style.transformOrigin = 'right center';
+        } else {
+          branch.style.left = x + 'px';
+          branch.style.transformOrigin = 'left center';
+        }
+      }
+      return {x, y};
+    });
+    
+    if (pts.length === 0) return;
+    
+    d += \`M \${lineCx} 0 L \${lineCx} \${Math.max(0, pts[0].y - 150)} \`;
+    d += \`C \${lineCx} \${pts[0].y - 50}, \${pts[0].x} \${pts[0].y - 50}, \${pts[0].x} \${pts[0].y} \`;
+    
+    for (let i = 0; i < pts.length - 1; i++) {
+      const p1 = pts[i], p2 = pts[i+1];
+      const my = (p1.y + p2.y) / 2;
+      d += \`C \${p1.x} \${my}, \${p2.x} \${my}, \${p2.x} \${p2.y} \`;
+    }
+    
+    const last = pts[pts.length-1];
+    d += \`C \${last.x} \${last.y + 50}, \${lineCx} \${last.y + 50}, \${lineCx} \${last.y + 100} \`;
+    d += \`Q \${lineCx-20} \${last.y + 130}, \${lineCx+10} \${last.y + 150} T \${lineCx} \${last.y + 200}\`;
+    
+    track.setAttribute('d', d);
+    prog.setAttribute('d', d);
+    
+    pathLen = track.getTotalLength();
+    prog.style.strokeDasharray = pathLen;
+    prog.style.strokeDashoffset = pathLen;
+    svg.style.height = (last.y + 250) + 'px';
+  }
+  
+  let currentP = 0, targetP = 0;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let ticking = true;
+  
+  function loop() {
+    if (!ticking) return;
+    if (reduceMotion) {
+      prog.style.strokeDashoffset = 0;
+      head.style.display = 'none';
+      items.forEach(item => item.style.setProperty('--p', 1));
+      return;
+    }
+    
+    const bodyRect = body.getBoundingClientRect();
+    const vh = window.innerHeight;
+    const st = -bodyRect.top + vh * 0.55;
+    targetP = Math.max(0, Math.min(1, st / bodyRect.height));
+    
+    if (Math.abs(targetP - currentP) > 0.0005) {
+      currentP += (targetP - currentP) * 0.12;
+      const drawLen = currentP * pathLen;
+      prog.style.strokeDashoffset = Math.max(0, pathLen - drawLen);
+      const pt = track.getPointAtLength(drawLen);
+      head.setAttribute('cx', pt.x);
+      head.setAttribute('cy', pt.y);
+    }
+    
+    items.forEach(item => {
+      const r = item.getBoundingClientRect();
+      let itemP = (vh - r.top) / (vh * 0.6);
+      itemP = Math.max(0, Math.min(1, itemP));
+      item.style.setProperty('--p', itemP);
+    });
+    
+    requestAnimationFrame(loop);
+  }
+  
+  window.addEventListener('resize', drawPath);
+  document.fonts.ready.then(drawPath);
+  window.addEventListener('load', drawPath);
+  if (typeof ResizeObserver !== 'undefined') {
+    new ResizeObserver(drawPath).observe(body);
+  }
+  
+  drawPath();
+  requestAnimationFrame(loop);
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('tl-active');
+        const dot = e.target.querySelector('.timeline-dot');
+        if (!dot.classList.contains('reached')) {
+          dot.classList.add('reached');
+          if (e.target.id === 'y2025') dot.classList.add('pulse-loop');
+          else dot.classList.add('pulse');
+        }
+      }
+    });
+  }, { threshold: 0.4 });
+  items.forEach(i => obs.observe(i));
 }
 
 function enhanceTeamCards() {
@@ -560,7 +768,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         initGSAP(); initTilt(); initMagnetic(); initCustomCursor(); 
         initPageTransitions(); initCinematicText(); initParallax(); initProjectFilter();
-        initHistoryTimeline(); initOrganicImpact();
+        initTimelineCurve(); initOrganicImpact();
       };
       document.head.appendChild(flipScript);
     };
