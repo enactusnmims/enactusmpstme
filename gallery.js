@@ -15,8 +15,8 @@
     var portrait = sec.layout === 'portrait';
     var wrap = document.createElement('div');
     wrap.className = 'g-sec'; wrap.id = 'g-' + sec.id;
-    wrap.innerHTML = '<div class="g-sec-head"><h3 class="g-sec-title">' + sec.title +
-      '</h3><p class="g-sec-note">' + esc(sec.note) + '</p></div>';
+    wrap.innerHTML = (sec.title || sec.note) ? '<div class="g-sec-head"><h3 class="g-sec-title">' + (sec.title || '') +
+      '</h3><p class="g-sec-note">' + esc(sec.note) + '</p></div>' : '';
     var board = document.createElement('div');
     board.className = 'g-board ' + (portrait ? 'g-board--portrait' : 'g-board--natural');
 

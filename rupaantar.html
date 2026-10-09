@@ -88,24 +88,24 @@
     /* ─── RUPAANTAR JOURNEY TIMELINE ──────────────────────────── */
     .rupa-timeline {
       position: relative;
-      padding-left: 48px;
+      padding-left: 60px;
       margin-top: 32px;
-    }
-
-    .rupa-timeline::before {
-      content: '';
-      position: absolute;
-      left: 16px;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: rgba(82, 183, 136, 0.2);
-      border-radius: 1px;
     }
 
     .rupa-timeline-item {
       position: relative;
       margin-bottom: 48px;
+    }
+
+    .rupa-timeline-item:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: -39px;
+      top: 26px;
+      bottom: -48px;
+      width: 2px;
+      background: rgba(82, 183, 136, 0.2);
+      border-radius: 1px;
     }
 
     .rupa-timeline-item:last-child {
@@ -114,10 +114,10 @@
 
     .rupa-timeline-dot {
       position: absolute;
-      left: -48px;
+      left: -60px;
       top: 4px;
-      width: 34px;
-      height: 34px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       background: #2D6A4F;
       color: var(--white);
@@ -126,7 +126,7 @@
       justify-content: center;
       font-family: var(--font-head);
       font-weight: 800;
-      font-size: 10px;
+      font-size: 12px;
       border: 4px solid var(--obsidian);
       z-index: 1;
       transition: all var(--trans);
@@ -533,8 +533,7 @@
 
         <li class="nav-dropdown"><a href="#">Who We Are <span class="nav-drop-icon">&#9660;</span></a>
 
-          <div class="dropdown"><a href="about.html">About Us</a><a href="team.html">Team 2026-27</a><a
-              href="alumni.html">Alumni</a></div>
+          <div class="dropdown"><a href="about.html">About Us</a></div>
 
         </li>
 
@@ -582,11 +581,17 @@
         <p class="page-hero-sub reveal">Transforming agricultural crop waste into premium eco-paper products while
           empowering rural women artisans and driving India's circular economy.</p>
 
-        <div style="display:flex;gap:14px;margin-top:28px;flex-wrap:wrap">
+        <div style="display:flex;gap:14px;margin-top:28px;flex-wrap:wrap;align-items:center">
 
           <a href="contact.html#support" class="btn btn-yellow">Partner With Us</a>
 
           <a href="projects.html" class="btn btn-outline-white">All Projects</a>
+
+          <div class="footer-socials" style="margin-left:8px;gap:10px">
+            <!-- TODO: add actual links later -->
+            <a href="#" class="footer-social" style="background:rgba(255,255,255,0.1);color:#fff;border-color:transparent" title="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zM17.5 6.5h.01"/></svg></a>
+            <a href="#" class="footer-social" style="background:rgba(255,255,255,0.1);color:#fff;border-color:transparent" title="Website"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 000 20 14.5 14.5 0 000-20"/><path d="M2 12h20"/></svg></a>
+          </div>
 
         </div>
 
@@ -604,7 +609,7 @@
 
         <span class="ticker-item"><span class="ticker-dot"></span>Turning Waste Into Wealth</span>
         <span class="ticker-item"><span class="ticker-dot"></span>Rice Husk Eco-Paper</span>
-        <span class="ticker-item"><span class="ticker-dot"></span>₹5 Per Unit</span>
+
         <span class="ticker-item"><span class="ticker-dot"></span>Agro-Waste Transformation</span>
         <span class="ticker-item"><span class="ticker-dot"></span>Circular Economy</span>
         <span class="ticker-item"><span class="ticker-dot"></span>IIM Indore 2nd Place</span>
@@ -695,7 +700,7 @@
 
             <h2 class="section-title">Eco-Paper from <span>Crop Waste</span></h2>
 
-            <p style="font-size:15.5px;color:var(--text-primary);line-height:1.8;margin-top:16px">Rice husk and straw - agricultural byproducts typically burned - are pulped and processed by trained rural women artisans into handmade premium eco-paper. The result: a <strong style="color:var(--yellow)">₹5/unit</strong> product that is tree-free, sustainable, and 3-5x cheaper than competitors.</p>
+            <p style="font-size:15.5px;color:var(--text-primary);line-height:1.8;margin-top:16px">Rice husk and straw - agricultural byproducts typically burned - are pulped and processed by trained rural women artisans into handmade premium eco-paper. The result: a product that is tree-free, sustainable, and 3-5x cheaper than competitors.</p>
 
 
 
@@ -964,7 +969,7 @@
 
               <div
                 style="padding:16px 20px;background:var(--onyx-light);border-radius:8px;border-left:4px solid var(--yellow);font-size:14px;color:var(--text-secondary);line-height:1.6">
-                Successfully developed a working prototype - handmade eco-paper sheets from rice husk priced at ₹5/unit,
+                Successfully developed a working prototype - handmade eco-paper sheets from rice husk,
                 with 44.3% going directly to artisans.</div>
 
             </div>
@@ -1040,6 +1045,61 @@
 
 
 
+    <!-- RUPAANTAR DIARIES -->
+    <section class="section">
+      <div class="container">
+        <div class="section-eyebrow">Our Collection</div>
+        <h2 class="section-title">Rupaantar <span>Diaries</span></h2>
+        <div class="grid-2" style="gap:32px;margin-top:40px">
+
+          <div class="glass info-card" style="border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);border-top:3px solid #2D6A4F;display:flex;flex-direction:column;padding:0">
+            <div style="height:280px;overflow:hidden;position:relative;background:#0d0d0d">
+              <img src="images/gallery/opt/notebooks-rupa-1-full.webp" alt="Warli Art Notebook" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease">
+            </div>
+            <div style="padding:24px;display:flex;flex-direction:column;flex-grow:1">
+              <h3 style="font-family:var(--font-head);font-weight:700;font-size:18px;color:var(--white);margin-bottom:8px">Warli Art Notebook</h3>
+              <div style="font-size:11px;color:#52B788;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px">Rice Husk Eco-Paper</div>
+              <p style="font-size:14.5px;color:var(--text-secondary);line-height:1.6;flex-grow:1">Beautifully handcrafted notebook featuring traditional Warli art on the cover, made entirely from our sustainable rice husk eco-paper.</p>
+            </div>
+          </div>
+
+          <div class="glass info-card" style="border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);border-top:3px solid #2D6A4F;display:flex;flex-direction:column;padding:0">
+            <div style="height:280px;overflow:hidden;position:relative;background:#0d0d0d">
+              <img src="images/gallery/opt/notebooks-rupa-2-full.webp" alt="The Rupaantar Notebook" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease">
+            </div>
+            <div style="padding:24px;display:flex;flex-direction:column;flex-grow:1">
+              <h3 style="font-family:var(--font-head);font-weight:700;font-size:18px;color:var(--white);margin-bottom:8px">The Rupaantar Notebook</h3>
+              <div style="font-size:11px;color:#52B788;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px">Rice Husk Eco-Paper</div>
+              <p style="font-size:14.5px;color:var(--text-secondary);line-height:1.6;flex-grow:1">Our classic branded notebook, showcasing the raw, organic texture of upcycled crop waste transformed into premium stationery.</p>
+            </div>
+          </div>
+
+          <div class="glass info-card" style="border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);border-top:3px solid #2D6A4F;display:flex;flex-direction:column;padding:0">
+            <div style="height:280px;overflow:hidden;position:relative;background:#0d0d0d">
+              <img src="images/gallery/opt/notebooks-rupa-3-full.webp" alt="Peacock Art (NMIMS edition)" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease">
+            </div>
+            <div style="padding:24px;display:flex;flex-direction:column;flex-grow:1">
+              <h3 style="font-family:var(--font-head);font-weight:700;font-size:18px;color:var(--white);margin-bottom:8px">NMIMS Edition — Peacock Art</h3>
+              <div style="font-size:11px;color:#52B788;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px">Corporate Gifting</div>
+              <p style="font-size:14.5px;color:var(--text-secondary);line-height:1.6;flex-grow:1">Custom-printed edition featuring vibrant peacock art, perfect for institutional and corporate gifting initiatives.</p>
+            </div>
+          </div>
+          
+          <div class="glass info-card" style="border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);border-top:3px solid #2D6A4F;display:flex;flex-direction:column;padding:0">
+            <div style="height:280px;overflow:hidden;position:relative;background:#0d0d0d">
+              <img src="images/gallery/opt/notebooks-rupa-5-full.webp" alt="Mandala Notebook" style="width:100%;height:100%;object-fit:cover;transition:transform 0.6s ease">
+            </div>
+            <div style="padding:24px;display:flex;flex-direction:column;flex-grow:1">
+              <h3 style="font-family:var(--font-head);font-weight:700;font-size:18px;color:var(--white);margin-bottom:8px">Mandala Art Notebook</h3>
+              <div style="font-size:11px;color:#52B788;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px">Rupaantar &times; Enactus MPSTME</div>
+              <p style="font-size:14.5px;color:var(--text-secondary);line-height:1.6;flex-grow:1">Intricate mandala designs printed on our sustainable, tree-free eco-paper, supporting both the environment and rural artisans.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
     <!-- PROJECT TEAM -->
 
     <section class="section">
@@ -1068,9 +1128,7 @@
 
         </div>
 
-        <div style="margin-top:12px"><a href="team.html"
-            style="font-family:var(--font-head);font-size:13px;font-weight:700;color:var(--yellow);text-transform:uppercase;letter-spacing:0.06em">View
-            Full Team →</a></div>
+        <div style="margin-top:12px"></div>
 
       </div>
 
@@ -1119,12 +1177,12 @@
           <p class="footer-about-desc">Student-driven ventures creating sustainable livelihoods and environmental change
             at NMIMS MPSTME, Mumbai.</p>
 
-          <div class="footer-socials"><a href="https://www.linkedin.com/company/enactus-mpstme/" target="_blank"
+          <div class="footer-socials"><a href="https://www.linkedin.com/company/rupaantar/" target="_blank"
               rel="noopener" class="footer-social"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2">
                 <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
                 <circle cx="4" cy="4" r="2" />
-              </svg></a><a href="https://www.instagram.com/en.mpstme/" target="_blank" rel="noopener"
+              </svg></a><a href="https://www.instagram.com/projectrupaantar?stkn=NTZvaHVvMjU5NGMx" target="_blank" rel="noopener"
               class="footer-social"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="2">
                 <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
@@ -1135,8 +1193,7 @@
 
         <div>
           <div class="footer-col-title">Navigate</div>
-          <div class="footer-links"><a href="index.html">Home</a><a href="about.html">About</a><a
-              href="team.html">Team</a><a href="history.html">History</a></div>
+          <div class="footer-links"><a href="index.html">Home</a><a href="about.html">About</a><a href="history.html">History</a></div>
         </div>
 
         <div>

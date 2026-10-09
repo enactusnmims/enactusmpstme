@@ -21,12 +21,13 @@ OPT = GAL / 'opt'
 EXT = {'.jpg', '.jpeg', '.png', '.webp'}
 
 SECTIONS = [
+    dict(id='parichay', folder='parichay', title='',
+         note='',
+         layout='natural', default=''),
     dict(id='notebooks', folder='notebooks', title='The <i>Notebooks</i>', note='Project Rupaantar',
          layout='natural', default='Rupaantar notebook'),
     dict(id='shilpkaar', folder='shilpkaar', title='<i>Shilpkaar</i>', note='Project Shilpkaar',
          layout='natural', default='Shilpkaar'),
-    dict(id='team', folder='team', title='Our <i>Team</i>', note='Enactus MPSTME',
-         layout='portrait', default='Team member'),
     dict(id='moments', folder='moments', title='<i>Moments</i>', note='Trips and events',
          layout='natural', default='Moment'),
 ]
@@ -38,7 +39,7 @@ RUPA = [
     ('Mandala Notebook', 'Rupaantar x Enactus MPSTME'), ('Wrapped & Ready', ''),
 ]
 
-CAMERA = re.compile(r'^(img|dsc|pxl|photo|wa|screenshot|image)?[-_ ]*[\d_\-\s]*$', re.I)
+CAMERA = re.compile(r'^(img|dsc|pxl|photo|wa|screenshot|image|team)?[-_ ]*[\d_\-\s]*$', re.I)
 
 def caption_from(stem, default):
     if CAMERA.match(stem):

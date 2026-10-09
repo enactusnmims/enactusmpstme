@@ -455,14 +455,14 @@ function initTimelineCurve() {
     body.classList.add('has-curve');
 
   const TL_PHOTOS = {
-    y2012: [],
-    y2015: [],
-    y2018: [],
-    y2019: [],
-    y2020: [],
-    y2021: [],
-    y2022: [],
-    y2025: []
+    y2012: [{ src: 'images/enactus.png', alt: 'Enactus Logo', fit: 'contain', bg: '#fff', pad: '16px' }],
+    y2015: [{ src: 'images/placeholder-zeen.jpg', alt: 'Project Zeen', fit: 'cover', bg: 'rgba(255,255,255,0.05)', pad: '0' }],
+    y2018: [{ src: 'images/placeholder-parivartan.jpg', alt: 'Project Parivartan', fit: 'cover', bg: 'rgba(255,255,255,0.05)', pad: '0' }],
+    y2019: [{ src: 'images/placeholder-vishuddh.jpg', alt: 'Project Vishuddh', fit: 'cover', bg: 'rgba(255,255,255,0.05)', pad: '0' }],
+    y2020: [{ src: 'images/placeholder-patched.jpg', alt: 'Project Patched', fit: 'cover', bg: 'rgba(255,255,255,0.05)', pad: '0' }],
+    y2021: [{ src: 'images/shipkaar-logo.jpg', alt: 'Shilpkaar Logo', fit: 'contain', bg: '#fff', pad: '0' }],
+    y2022: [{ src: 'images/rupantaar-logo.jpg', alt: 'Rupaantar Logo', fit: 'contain', bg: '#fff', pad: '0' }],
+    y2025: [{ src: 'images/krishividhan-logo.jpg', alt: 'Krishividhan Logo', fit: 'contain', bg: '#fff', pad: '16px' }]
   };
 
   const navWrap = document.querySelector('.timeline-wrap');
@@ -518,7 +518,7 @@ function initTimelineCurve() {
       photos.forEach((p, idx) => {
         const c = document.createElement('div');
         c.className = 'tl-card real' + (idx === 1 ? ' offset' : '');
-        c.innerHTML = `<img src="${p.src}" alt="${p.alt}" width="${p.w}" height="${p.h}" style="width:100%;height:100%;object-fit:cover;" loading="lazy">`;
+        c.innerHTML = `<img src="${p.src}" alt="${p.alt}" style="width:100%;height:100%;object-fit:${p.fit};background:${p.bg};padding:${p.pad};box-sizing:border-box;border-radius:12px;" loading="lazy">`;
         photoBlock.appendChild(c);
       });
     }
