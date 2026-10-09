@@ -81,64 +81,82 @@ const gallerySections = [
   ]
  },
  {
-  "id": "notebooks",
-  "title": "The <i>Notebooks</i>",
-  "note": "Project Rupaantar",
+  "id": "GBM",
+  "title": "<i>GBM</i>",
+  "note": "First meeting of this year with the new incoming execs.",
   "layout": "natural",
   "items": [
    {
-    "thumb": "images/gallery/opt/notebooks-rupa-1-thumb.webp",
-    "full": "images/gallery/opt/notebooks-rupa-1-full.webp",
+    "thumb": "images/gallery/opt/GBM-IMG_20260808_171429-thumb.webp",
+    "full": "images/gallery/opt/GBM-IMG_20260808_171429-full.webp",
     "w": 640,
-    "h": 1386,
-    "caption": "Warli Art Notebook",
+    "h": 287,
+    "caption": "GBM",
     "meta": "",
-    "alt": "Warli Art Notebook"
+    "alt": "GBM"
    },
    {
-    "thumb": "images/gallery/opt/notebooks-rupa-2-thumb.webp",
-    "full": "images/gallery/opt/notebooks-rupa-2-full.webp",
+    "thumb": "images/gallery/opt/GBM-IMG_8691-thumb.webp",
+    "full": "images/gallery/opt/GBM-IMG_8691-full.webp",
     "w": 640,
-    "h": 1386,
-    "caption": "The Rupaantar Notebook",
+    "h": 427,
+    "caption": "GBM",
     "meta": "",
-    "alt": "The Rupaantar Notebook"
+    "alt": "GBM"
    },
    {
-    "thumb": "images/gallery/opt/notebooks-rupa-3-thumb.webp",
-    "full": "images/gallery/opt/notebooks-rupa-3-full.webp",
+    "thumb": "images/gallery/opt/GBM-IMG-20260808-WA0028-thumb.webp",
+    "full": "images/gallery/opt/GBM-IMG-20260808-WA0028-full.webp",
     "w": 640,
-    "h": 1386,
-    "caption": "Peacock Art (NMIMS edition)",
+    "h": 853,
+    "caption": "IMG 20260808 WA0028",
     "meta": "",
-    "alt": "Peacock Art (NMIMS edition)"
+    "alt": "IMG 20260808 WA0028"
    },
    {
-    "thumb": "images/gallery/opt/notebooks-rupa-4-thumb.webp",
-    "full": "images/gallery/opt/notebooks-rupa-4-full.webp",
+    "thumb": "images/gallery/opt/GBM-20260808_182922-thumb.webp",
+    "full": "images/gallery/opt/GBM-20260808_182922-full.webp",
     "w": 640,
-    "h": 1386,
-    "caption": "Peacock, Second Angle",
+    "h": 360,
+    "caption": "GBM",
     "meta": "",
-    "alt": "Peacock, Second Angle"
+    "alt": "GBM"
    },
    {
-    "thumb": "images/gallery/opt/notebooks-rupa-5-thumb.webp",
-    "full": "images/gallery/opt/notebooks-rupa-5-full.webp",
+    "thumb": "images/gallery/opt/GBM-IMG_8697-thumb.webp",
+    "full": "images/gallery/opt/GBM-IMG_8697-full.webp",
     "w": 640,
-    "h": 1386,
-    "caption": "Mandala Notebook",
-    "meta": "Rupaantar x Enactus MPSTME",
-    "alt": "Mandala Notebook"
+    "h": 427,
+    "caption": "GBM",
+    "meta": "",
+    "alt": "GBM"
    },
    {
-    "thumb": "images/gallery/opt/notebooks-rupa-6-thumb.webp",
-    "full": "images/gallery/opt/notebooks-rupa-6-full.webp",
+    "thumb": "images/gallery/opt/GBM-IMG_8708-thumb.webp",
+    "full": "images/gallery/opt/GBM-IMG_8708-full.webp",
     "w": 640,
-    "h": 1386,
-    "caption": "Wrapped & Ready",
+    "h": 427,
+    "caption": "GBM",
     "meta": "",
-    "alt": "Wrapped & Ready"
+    "alt": "GBM"
+   },
+   {
+    "thumb": "images/gallery/opt/GBM-IMG_8713-thumb.webp",
+    "full": "images/gallery/opt/GBM-IMG_8713-full.webp",
+    "w": 640,
+    "h": 427,
+    "caption": "GBM",
+    "meta": "",
+    "alt": "GBM"
+   },
+   {
+    "thumb": "images/gallery/opt/GBM-IMG_8717-thumb.webp",
+    "full": "images/gallery/opt/GBM-IMG_8717-full.webp",
+    "w": 640,
+    "h": 427,
+    "caption": "GBM",
+    "meta": "",
+    "alt": "GBM"
    }
   ]
  }
