@@ -7,7 +7,7 @@
   var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
     return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var ROTS = [-2, 1.5, -1, 2, -1.6, 1.1, -0.8, 1.8];
+  var ROTS = [-3.5, 2.5, -3, 3.5, -2.5, 2, -2, 3];
   var prints = [], firstImg = true;
 
   data.forEach(function (sec) {
@@ -15,8 +15,8 @@
     var portrait = sec.layout === 'portrait';
     var wrap = document.createElement('div');
     wrap.className = 'g-sec'; wrap.id = 'g-' + sec.id;
-    wrap.innerHTML = '<div class="g-sec-head"><h3 class="g-sec-title">' + sec.title +
-      '</h3><p class="g-sec-note">' + esc(sec.note) + '</p></div>';
+    wrap.innerHTML = (sec.title || sec.note) ? '<div class="g-sec-head"><h3 class="g-sec-title">' + (sec.title || '') +
+      '</h3><p class="g-sec-note">' + esc(sec.note) + '</p></div>' : '';
     var board = document.createElement('div');
     board.className = 'g-board ' + (portrait ? 'g-board--portrait' : 'g-board--natural');
 

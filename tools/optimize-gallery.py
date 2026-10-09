@@ -21,24 +21,20 @@ OPT = GAL / 'opt'
 EXT = {'.jpg', '.jpeg', '.png', '.webp'}
 
 SECTIONS = [
-    dict(id='notebooks', folder='notebooks', title='The <i>Notebooks</i>', note='Project Rupaantar',
-         layout='natural', default='Rupaantar notebook'),
+    dict(id='parichay', folder='parichay', title='',
+         note='',
+         layout='natural', default=''),
+    dict(id='GBM', folder='GBM', title='<i>GBM</i>', note='First meeting of this year with the new incoming execs.',
+         layout='natural', default='GBM'),
     dict(id='shilpkaar', folder='shilpkaar', title='<i>Shilpkaar</i>', note='Project Shilpkaar',
          layout='natural', default='Shilpkaar'),
-    dict(id='team', folder='team', title='Our <i>Team</i>', note='Enactus MPSTME',
-         layout='portrait', default='Team member'),
     dict(id='moments', folder='moments', title='<i>Moments</i>', note='Trips and events',
          layout='natural', default='Moment'),
 ]
 
-# Existing Rupaantar photos, fixed captions in order.
-RUPA = [
-    ('Warli Art Notebook', ''), ('The Rupaantar Notebook', ''),
-    ('Peacock Art (NMIMS edition)', ''), ('Peacock, Second Angle', ''),
-    ('Mandala Notebook', 'Rupaantar x Enactus MPSTME'), ('Wrapped & Ready', ''),
-]
 
-CAMERA = re.compile(r'^(img|dsc|pxl|photo|wa|screenshot|image)?[-_ ]*[\d_\-\s]*$', re.I)
+
+CAMERA = re.compile(r'^(img|dsc|pxl|photo|wa|screenshot|image|team)?[-_ ]*[\d_\-\s]*$', re.I)
 
 def caption_from(stem, default):
     if CAMERA.match(stem):
@@ -68,11 +64,7 @@ def main():
     result, total = [], 0
     for sec in SECTIONS:
         items = []
-        if sec['id'] == 'notebooks':
-            for i, (cap, meta) in enumerate(RUPA, 1):
-                src = ROOT / 'images' / f'rupa-product-{i}.jpeg'
-                if src.exists():
-                    items.append(item(save(src, f'notebooks-rupa-{i}'), cap, meta))
+
         folder = GAL / sec['folder']
         if folder.is_dir():
             for src in sorted(folder.iterdir()):
